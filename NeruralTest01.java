@@ -107,55 +107,24 @@ public class NeruralTest01 {
 
     public static void main(String[] args){
         NeruralTest01 nt2 = new NeruralTest01();
-        for(int i = 0; i < 1000; i++) {
-            nt2.setInputValues(
-                    nt2.normalize(14.23, 11.03, 14.83),
-                    nt2.normalize(1.71, 0.74, 5.8),
-                    nt2.normalize(2.43, 1.36, 3.23),
-                    nt2.normalize(15.6, 10.6, 30.0),
-                    nt2.normalize(127.0, 70.0, 162.0),
-                    nt2.normalize(2.8, 0.98, 3.88),
-                    nt2.normalize(3.06, 0.34, 5.08),
-                    nt2.normalize(0.28, 0.13, 0.66),
-                    nt2.normalize(2.29, 0.41, 3.58),
-                    nt2.normalize(5.64, 1.28, 13.0),
-                    nt2.normalize(1.04, 0.48, 1.71),
-                    nt2.normalize(3.92, 1.27, 4.0),
-                    nt2.normalize(1065.0, 278.0, 1680.0)
-            );
-            nt2.think();
-            System.out.println("----------");
-            System.out.println(Arrays.toString(nt2.outputVector));
-
-            nt2.expectedOutput[0] = 1.0;
-            nt2.expectedOutput[1] = 0.0;
-            nt2.expectedOutput[2] = 0.0;
-            nt2.learn();
-
-            nt2.setInputValues(
-                    nt2.normalize(14.23, 11.03, 14.83),
-                    nt2.normalize(1.71, 0.74, 5.8),
-                    nt2.normalize(2.43, 1.36, 3.23),
-                    nt2.normalize(15.6, 10.6, 30.0),
-                    nt2.normalize(127.0, 70.0, 162.0),
-                    nt2.normalize(2.8, 0.98, 3.88),
-                    nt2.normalize(3.06, 0.34, 5.08),
-                    nt2.normalize(0.28, 0.13, 0.66),
-                    nt2.normalize(2.29, 0.41, 3.58),
-                    nt2.normalize(5.64, 1.28, 13.0),
-                    nt2.normalize(1.04, 0.48, 1.71),
-                    nt2.normalize(3.92, 1.27, 4.0),
-                    nt2.normalize(1065.0, 278.0, 1680.0)
-            );
-            nt2.think();
-            System.out.println("----------");
-            System.out.println(Arrays.toString(nt2.outputVector));
-
-            nt2.expectedOutput[0] = 1.0;
-            nt2.expectedOutput[1] = 0.0;
-            nt2.expectedOutput[2] = 0.0;
-            nt2.learn();
-        }
+        nt2.setInputValues(
+                nt2.normalize(14.23, 11.03, 14.83),
+                nt2.normalize(1.71, 0.74, 5.8),
+                nt2.normalize(2.43, 1.36, 3.23),
+                nt2.normalize(15.6, 10.6, 30.0),
+                nt2.normalize(127.0, 70.0, 162.0),
+                nt2.normalize(2.8, 0.98, 3.88),
+                nt2.normalize(3.06, 0.34, 5.08),
+                nt2.normalize(0.28, 0.13, 0.66),
+                nt2.normalize(2.29, 0.41, 3.58),
+                nt2.normalize(5.64, 1.28, 13.0),
+                nt2.normalize(1.04, 0.48, 1.71),
+                nt2.normalize(3.92, 1.27, 4.0),
+                nt2.normalize(1065.0, 278.0, 1680.0)
+        );
+        nt2.think();
+        System.out.println("----------");
+        System.out.println(Arrays.toString(nt2.outputVector));
         System.out.println("----------");
         System.out.println(Arrays.toString(nt2.outputVector));
     }
