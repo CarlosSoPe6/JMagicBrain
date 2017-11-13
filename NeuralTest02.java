@@ -18,7 +18,7 @@ public class NeuralTest02 {
     private double[] errorVector;
     private double[][] sigmas;
 
-    public final double MAX_ERROR = 0.01;
+    public final double MAX_ERROR = 0.02;
     private final double LEARNING_RATE = 0.2;
 
     public NeuralTest02(int... args){
@@ -165,7 +165,7 @@ public class NeuralTest02 {
         ArrayList<CSVRecord> recordArrayList = new ArrayList<>(178);
         CSVRecord record;
         records.iterator();
-        Iterator<CSVRecord> iterator = records.iterator();;
+        Iterator<CSVRecord> iterator = records.iterator();
         while (iterator.hasNext()) {
             record = iterator.next();
             recordArrayList.add(record);
@@ -176,7 +176,7 @@ public class NeuralTest02 {
         double errt = 0;
         boolean endEvaluation = false;
         int epoch = 0;
-        while(!endEvaluation && epoch < 10000) {
+        while(!endEvaluation && epoch < 22) {
             for(int r = 0; r < recordArrayList.size(); r++) {
                 record = recordArrayList.get(r);
                 for (int i = 1; i < record.size(); i++) {
@@ -198,26 +198,25 @@ public class NeuralTest02 {
 
                 count++;
                 errt = nt2.getTotalError();
-                if(nt2.MAX_ERROR > errt){
+                if(nt2.MAX_ERROR >= errt){
                     hits++;
                 }else{
                     hits = 0;
                     nt2.learn();
                 }
 
-                if(hits == epochSize - 1){
+                if(hits == epochSize/4){
                     endEvaluation = true;
                     break;
                 }
             }
-            
             System.out.printf("Total Error: %f. Epoc: %03d. Entry: %03d\n", errt, epoch, count);
             count = 0;
             epoch++;
         }
 
         System.out.println("------");
-        System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch);
+        System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch - 1);
         System.out.println("------");
 
         for (CSVRecord aRecordArrayList : recordArrayList) {
