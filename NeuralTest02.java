@@ -198,7 +198,7 @@ public class NeuralTest02 {
 
                 count++;
                 errt = nt2.getTotalError();
-                if(nt2.MAX_ERROR > hits){
+                if(nt2.MAX_ERROR > errt){
                     hits++;
                 }else{
                     hits = 0;
@@ -210,10 +210,7 @@ public class NeuralTest02 {
                     break;
                 }
             }
-
-            if(errt <= 0.02){
-                break;
-            }
+            
             System.out.printf("Total Error: %f. Epoc: %03d. Entry: %03d\n", errt, epoch, count);
             count = 0;
             epoch++;
