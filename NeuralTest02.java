@@ -18,7 +18,7 @@ public class NeuralTest02 {
     private double[] errorVector;
     private double[][] sigmas;
 
-    public final double MAX_ERROR = 0.02;
+    public final double MAX_ERROR = 0.2;
     private final double LEARNING_RATE = 0.2;
 
     public NeuralTest02(int... args){
@@ -88,7 +88,7 @@ public class NeuralTest02 {
     }
 
     public void learn(){
-        //System.out.printf("Total Err: %f, Vector %s\n", this.getTotalError(), Arrays.toString(this.errorVector));
+        this.getTotalError();
         double sigma = 0;
 
         // Sigma for output, the last row
@@ -139,7 +139,7 @@ public class NeuralTest02 {
     }
 
     public static void main(String[] args) throws IOException {
-        NeuralTest02 nt2 = new NeuralTest02(13, 17, 3);
+        NeuralTest02 nt2 = new NeuralTest02(13, 4, 3);
         double NormalizationMax[] = {14.83, 5.8, 3.23, 30, 162, 3.88, 5.08, 0.66, 3.58, 13, 1.71, 4, 1680};
         double NormalizationMin[] = {11.03, 0.74, 1.36, 10.6, 70, 0.98, 0.34, 0.13, 0.41, 1.28, 0.48, 1.27, 278};
 
@@ -176,14 +176,14 @@ public class NeuralTest02 {
         double errt = 0;
         boolean endEvaluation = false;
         int epoch = 0;
-        while(!endEvaluation && epoch < 22) {
+        while(!endEvaluation && epoch <= 100) {
             for(int r = 0; r < recordArrayList.size(); r++) {
                 record = recordArrayList.get(r);
                 for (int i = 1; i < record.size(); i++) {
                     nt2.setInputValue(nt2.normalize(Double.parseDouble(record.get(i)), NormalizationMin[i - 1], NormalizationMax[i - 1]), i - 1);
                 }
                 nt2.think();
-                // System.out.println(Arrays.toString(nt2.getOutput()));
+
                 switch (Integer.parseInt(record.get(0))) {
                     case 1:
                         nt2.setExpectedOutput(1.0, 0, 0);
@@ -198,19 +198,25 @@ public class NeuralTest02 {
 
                 count++;
                 errt = nt2.getTotalError();
-                if(nt2.MAX_ERROR >= errt){
+                if(errt <= nt2.MAX_ERROR){
                     hits++;
                 }else{
                     hits = 0;
                     nt2.learn();
                 }
 
-                if(hits == epochSize/4){
+                if(hits == epochSize - 1){
                     endEvaluation = true;
                     break;
                 }
+
+
+                //System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch);
+                if(errt == Double.NaN || errt == Double.NEGATIVE_INFINITY || errt == Double.POSITIVE_INFINITY){
+                    System.exit(3);
+                }
             }
-            System.out.printf("Total Error: %f. Epoc: %03d. Entry: %03d\n", errt, epoch, count);
+            System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch);
             count = 0;
             epoch++;
         }
