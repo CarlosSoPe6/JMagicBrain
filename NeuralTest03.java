@@ -42,10 +42,14 @@ public class NeuralTest03 {
             }
         }
 
+        double initialLimit = 0;
+
         for (int i = 0; i < weightsMatrix.length; i++){
             for(int j = 0; j < weightsMatrix[i].length; j++){
+                initialLimit = Math.sqrt(6.0 /(args[i] + args[i + 1]));
+                // System.out.println(initialLimit);
                 for(int k = 0; k < weightsMatrix[i][j].length - 1; k++){
-                    weightsMatrix[i][j][k] = Math.random();
+                    weightsMatrix[i][j][k] = (Math.random() % ((initialLimit * 2) + 1)) - initialLimit;
                 }
             }
         }
