@@ -18,7 +18,7 @@ public class NeuralTest02 {
     private double[] errorVector;
     private double[][] sigmas;
 
-    public final double MAX_ERROR = 0.2;
+    public final double MAX_ERROR = 0.01;
     private final double LEARNING_RATE = 0.2;
 
     public NeuralTest02(int... args){
@@ -40,7 +40,7 @@ public class NeuralTest02 {
 
         for (int i = 0; i < weightsMatrix.length; i++){
             for(int j = 0; j < weightsMatrix[i].length; j++){
-                for(int k = 0; k < weightsMatrix[i][j].length; k++){
+                for(int k = 0; k < weightsMatrix[i][j].length - 1; k++){
                     weightsMatrix[i][j][k] = Math.random();
                 }
             }
@@ -114,7 +114,7 @@ public class NeuralTest02 {
             for(int j = 0; j < weightsMatrix[i].length; j++){
                 for(int k = 0; k < weightsMatrix[i][j].length; k++){
                     try {
-                        weightsMatrix[i][j][k] = weightsMatrix[i][j][k] - LEARNING_RATE * layers[i][k] * sigmas[i][j];
+                        weightsMatrix[i][j][k] -= LEARNING_RATE * layers[i][k] * sigmas[i][j];
                     }catch (Exception e){
                         System.out.printf("i: %d, j: %d, k: %d \n", i, j, k);
                         System.out.printf("x: %d, y: %d, z: %d \n", weightsMatrix.length,  weightsMatrix[i].length, weightsMatrix[i][j].length);
@@ -176,7 +176,7 @@ public class NeuralTest02 {
         double errt = 0;
         boolean endEvaluation = false;
         int epoch = 0;
-        while(!endEvaluation && epoch <= 100) {
+        while(!endEvaluation && epoch <= 10000) {
             for(int r = 0; r < recordArrayList.size(); r++) {
                 record = recordArrayList.get(r);
                 for (int i = 1; i < record.size(); i++) {
@@ -210,19 +210,18 @@ public class NeuralTest02 {
                     break;
                 }
 
-
-                //System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch);
                 if(errt == Double.NaN || errt == Double.NEGATIVE_INFINITY || errt == Double.POSITIVE_INFINITY){
                     System.exit(3);
                 }
             }
-            System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch);
+
             count = 0;
             epoch++;
+            System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch);
         }
 
         System.out.println("------");
-        System.out.printf("Total Error: %f. Epoc: %03d.\n", errt, epoch - 1);
+        System.out.printf("Final Total Error: %f. Epoc: %03d.\n", errt, epoch);
         System.out.println("------");
 
         for (CSVRecord aRecordArrayList : recordArrayList) {
