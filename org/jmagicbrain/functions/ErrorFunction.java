@@ -14,10 +14,10 @@ public abstract class ErrorFunction {
     protected NeuralNetwork neuralNetwork;
 
     /**
-     * Inicia la instancia de ErrorFunction
-     * @param neuralNetwork Neural network to evaluate
+     * Establece la red neuronal con la cual se evaluará
+     * @param neuralNetwork
      */
-    public ErrorFunction(NeuralNetwork neuralNetwork){
+    public final void setNeuralNetwork(NeuralNetwork neuralNetwork){
         this.neuralNetwork = neuralNetwork;
     }
 
