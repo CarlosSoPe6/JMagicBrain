@@ -1,6 +1,6 @@
 package org.jmagicbrain;
 
-import org.jmagicbrain.errorfunction.ErrorFunction;
+import org.jmagicbrain.functions.ErrorFunction;
 
 public class NeuralNetwork {
 

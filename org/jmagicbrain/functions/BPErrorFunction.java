@@ -1,4 +1,4 @@
-package org.jmagicbrain.errorfunction;
+package org.jmagicbrain.functions;
 
 import org.jmagicbrain.NeuralNetwork;
 
