@@ -13,6 +13,9 @@ public class NeuralNetwork {
     private double[][][] weightsMatrix;
     private double numberOfWeights;
     private WeightInitializer initializer;
+    private ErrorFunction errorFunction;
+    private ActivationFunction activationFunction;
+    private Object trainingMethod;
 
     private NeuralNetwork(WeightInitializer weightInitializer, ErrorFunction errorFunction, ActivationFunction activationFunction, Object trainingMethod, Integer ... layersArray){
         this.layers = new double[layersArray.length][];
@@ -26,58 +29,132 @@ public class NeuralNetwork {
             }
         }
 
-        double initialLimit = 0;
-
-        for (int i = 0; i < weightsMatrix.length; i++){
-            for(int j = 0; j < weightsMatrix[i].length; j++){
-                // TODO: Define a initMethod
-                initialLimit = Math.sqrt(6.0 /(layersArray[i] + layersArray[i + 1]));
-                for(int k = 0; k < weightsMatrix[i][j].length - 1; k++){
-                    weightsMatrix[i][j][k] = (Math.random() % ((initialLimit * 2) + 1)) - initialLimit;
-                }
-            }
-        }
+        weightInitializer.initialize(weightsMatrix);
     }
 
+    /**
+     * Obtiene los pesos y umbrales de la red neuronal
+     * @return los pesos y umbrales en un arreglo de matrices
+     */
     public double[][][] getWeights(){
         return weightsMatrix;
     }
 
-    public class NeuralNetworkBuilder {
+    /**
+     * Iguala los valores de la capa de entrada para poder evaluar
+     * @param inputs los valores a evaluar. NORMALIZADOS
+     */
+    public void setInputLayer(double ... inputs){
+        if (inputs.length != layers[0].length){
+            // TODO: Exception
+        }
+        System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length);
+    }
+
+    /**
+     * Obtiene el resultado de evaluar la red neuronal
+     * @return El 'output layer'
+     */
+    public double[] getOutputLayer(){
+        return this.layers[layers.length - 1];
+    }
+
+    /**
+     * Evalua la red neuronal
+     */
+    public void think(){
+        double sum = 0;
+        // Number of layers - 1
+        for(int i = 0; i < weightsMatrix.length; i++){
+            // The next layer
+            for(int j = 0; j < weightsMatrix[i].length; j++){
+                for(int k = 0; k < weightsMatrix[i][j].length; k++){
+                    sum += layers[i][k] * weightsMatrix[i][j][k];
+                }
+                layers[i+1][j] = activationFunction.func(sum);
+                sum = 0;
+            }
+        }
+    }
+
+    /**
+     * Entrena la red neuronal
+     */
+    public void train(){
+        // trainingMethod.train();
+    }
+
+    /**
+     * Constructor para la red neuronal
+     */
+    public static class NeuralNetworkBuilder {
         private ErrorFunction errorFunction;
         private ActivationFunction activationFunction;
         private Object trainingMethod;
         private LinkedList<Integer> neuronQueue;
         private WeightInitializer initializer;
 
+        /**
+         * Constructor de NeuralNetworkBuilder
+         */
         public NeuralNetworkBuilder(){
             neuronQueue = new LinkedList<Integer>();
         }
 
+        /**
+         * Establece la instacia de ErrorFunction
+         * @param errorFunction instancia de ErrorFunction
+         * @return Referencia a si mismo
+         */
         public NeuralNetworkBuilder setErrorFunction(ErrorFunction errorFunction) {
             this.errorFunction = errorFunction;
             return this;
         }
 
+        /**
+         * Establece la instancia de ActivationFunction
+         * @param activationFunction Instancia de ActivationFunction
+         * @return Referencia a si mismo
+         */
         public NeuralNetworkBuilder setActivationFunction(ActivationFunction activationFunction){
             this.activationFunction = activationFunction;
             return this;
         }
 
-        public NeuralNetworkBuilder setTrainingMethod(){
+        /** Establece la instancia de TrainingMethod
+         * @param trainingMethod Instancia de TrainingMethod
+         * @return Referencia a si mismo
+         */
+        public NeuralNetworkBuilder setTrainingMethod(Object trainingMethod){
+            this.trainingMethod = trainingMethod;
             return this;
         }
 
+        /**
+         * Agrega una capapa de 'numberOfNeurons' neuronas
+         * @param numberOfNeurons Referencia a si mismo
+         * @return
+         */
         public NeuralNetworkBuilder addLayer(int numberOfNeurons){
             this.neuronQueue.add(numberOfNeurons);
             return this;
         }
 
+        /**
+         * Establence la instancia de WeightInitializer
+         * @param initializer Instalcia de WeightInitializer
+         * @return Referencia a si mismo
+         */
         public NeuralNetworkBuilder setWeightInitializer(WeightInitializer initializer){
             this.initializer = initializer;
             return this;
         }
 
+        /**
+         * Crea y retorna una referencia a un objeto
+         * @return Referecia al objeto construido
+         * @throws InvalidNeuralNetworkArguments
+         */
         public NeuralNetwork build() throws InvalidNeuralNetworkArguments{
             Integer[] layers = new Integer[neuronQueue.size()];
             neuronQueue.toArray(layers);
