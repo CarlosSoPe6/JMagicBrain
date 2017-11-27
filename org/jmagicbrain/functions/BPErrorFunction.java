@@ -2,6 +2,9 @@ package org.jmagicbrain.functions;
 
 import org.jmagicbrain.NeuralNetwork;
 
+/**
+ * Clase utilizada para calcular el error en Backpropagation
+ */
 public class BPErrorFunction extends ErrorFunction {
     /**
      * Inicia la instancia de ErrorFunction
@@ -14,6 +17,14 @@ public class BPErrorFunction extends ErrorFunction {
 
     @Override
     public double getError(double[][] trainingSet, double[][] objective) {
-        return 0;
+        neuralNetwork.setInputLayer(trainingSet[0]);
+        neuralNetwork.think();
+        double[] outputVector = neuralNetwork.getOutputLayer();
+        double error = 0;
+        for(int i = 0; i < outputVector.length; i++){
+            error += Math.pow(objective[0][i] - outputVector[i], 2);
+        }
+        return  error * 0.5;
+
     }
 }
