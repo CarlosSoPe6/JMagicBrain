@@ -1,4 +1,4 @@
-package org.jmagicbrain.funtions;
+package org.jmagicbrain.functions;
 
 /**
  * Interface utilzada para asignar la función de activación de la red neuronal
