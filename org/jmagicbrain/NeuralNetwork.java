@@ -16,7 +16,8 @@ import java.util.LinkedList;
 public class NeuralNetwork {
     private double[][] layers;
     private double[][][] weightsMatrix;
-    private double numberOfWeights;
+
+    private int numberOfWeights;
     private WeightInitializer initializer;
     private ErrorFunction errorFunction;
     private ActivationFunction activationFunction;
@@ -35,6 +36,10 @@ public class NeuralNetwork {
         }
 
         weightInitializer.initialize(weightsMatrix);
+    }
+
+    public int getNumberOfWeights() {
+        return numberOfWeights;
     }
 
     /**
