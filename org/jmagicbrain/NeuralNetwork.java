@@ -4,6 +4,7 @@ import org.jmagicbrain.exceptions.InvalidNeuralNetworkArguments;
 import org.jmagicbrain.functions.ActivationFunction;
 import org.jmagicbrain.functions.ErrorFunction;
 import org.jmagicbrain.initializers.WeightInitializer;
+import org.jmagicbrain.trainmethod.TrainMethod;
 
 import java.util.LinkedList;
 
@@ -19,9 +20,9 @@ public class NeuralNetwork {
     private WeightInitializer initializer;
     private ErrorFunction errorFunction;
     private ActivationFunction activationFunction;
-    private Object trainingMethod;
+    private TrainMethod trainingMethod;
 
-    private NeuralNetwork(WeightInitializer weightInitializer, ErrorFunction errorFunction, ActivationFunction activationFunction, Object trainingMethod, Integer ... layersArray){
+    private NeuralNetwork(WeightInitializer weightInitializer, ErrorFunction errorFunction, ActivationFunction activationFunction, TrainMethod trainingMethod, Integer ... layersArray){
         this.layers = new double[layersArray.length][];
         this.weightsMatrix = new double[layersArray.length - 1][][];
 
@@ -94,7 +95,7 @@ public class NeuralNetwork {
     public static class NeuralNetworkBuilder {
         private ErrorFunction errorFunction;
         private ActivationFunction activationFunction;
-        private Object trainingMethod;
+        private TrainMethod trainingMethod;
         private LinkedList<Integer> neuronQueue;
         private WeightInitializer initializer;
 
@@ -129,7 +130,7 @@ public class NeuralNetwork {
          * @param trainingMethod Instancia de TrainingMethod
          * @return Referencia a si mismo
          */
-        public NeuralNetworkBuilder setTrainingMethod(Object trainingMethod){
+        public NeuralNetworkBuilder setTrainingMethod(TrainMethod trainingMethod){
             this.trainingMethod = trainingMethod;
             return this;
         }
