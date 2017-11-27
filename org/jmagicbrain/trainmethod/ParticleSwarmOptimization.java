@@ -27,7 +27,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
 
     @Override
     public void train() {
-        
+
     }
 
     private void initParticles(){
@@ -35,7 +35,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
         double lo = 0.1* minX;
         double[] position = new double[neuralNetwork.getNumberOfWeights()];
         double[] velocity = new double[neuralNetwork.getNumberOfWeights()];
-        double error;
+        double error = 0    ;
         for(int i = 0; i < numberOfParticles; i++){
             for(int j = 0; j < position.length; j++) {
                 position[j] = (maxX - minX) * random.nextDouble() - minX;
