@@ -80,20 +80,6 @@ public class NeuralNetwork {
             }
         }
     }
-<<<<<<< HEAD
-    /**
-     * Funcion que devuelve los pesos de la red neuronal
-     * @return double[][][] con los valores actuales de los pesos de la red neuronal
-     */
-    public double[][][] getWeights(){
-        return weightsMatrix;
-    }
-
-    /**
-     * Clase utilizada para hcaer la construcción de la red neuronal
-     */
-    public class NeuralNetworkBuilder {
-=======
 
     /**
      * Entrena la red neuronal
@@ -106,7 +92,6 @@ public class NeuralNetwork {
      * Constructor para la red neuronal
      */
     public static class NeuralNetworkBuilder {
->>>>>>> 05debcc38d81b7226bc1f01934eaddc057a0a007
         private ErrorFunction errorFunction;
         private ActivationFunction activationFunction;
         private Object trainingMethod;
