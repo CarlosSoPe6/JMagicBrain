@@ -2,14 +2,14 @@ package org.jmagicbrain.exceptions;
 
 public class InvalidNeuralNetworkArguments extends RuntimeException {
 
-    private static String NAME = "InvalidNeuralNetworkArguments";
+    private static final String NAME = "InvalidNeuralNetworkArguments";
 
     public InvalidNeuralNetworkArguments(String message){
-        super(NAME + " " + message);
+        super(message);
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return String.format("%s: %s", NAME, super.toString());
     }
 }
