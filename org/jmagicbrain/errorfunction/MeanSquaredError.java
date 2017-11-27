@@ -1,14 +1,14 @@
-package org.jmagicbrain.errorfuntion;
+package org.jmagicbrain.errorfunction;
 
 import org.jmagicbrain.NeuralNetwork;
 
-public class BPErrorFunction extends ErrorFunction {
+public class MeanSquaredError extends ErrorFunction {
     /**
      * Inicia la instancia de ErrorFunction
      *
      * @param neuralNetwork Neural network to evaluate
      */
-    public BPErrorFunction(NeuralNetwork neuralNetwork) {
+    public MeanSquaredError(NeuralNetwork neuralNetwork) {
         super(neuralNetwork);
     }
 
