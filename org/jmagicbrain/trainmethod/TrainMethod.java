@@ -1,6 +1,7 @@
 package org.jmagicbrain.trainmethod;
 
 import org.jmagicbrain.NeuralNetwork;
+import org.jmagicbrain.functions.ErrorFunction;
 
 public abstract class TrainMethod
 {
@@ -9,9 +10,12 @@ public abstract class TrainMethod
 	protected double[][] trainingSet;
 	protected double[][] expectedOutput;
 	
-	public TrainMethod(double[][] trainingSet, double[][] expectedOutput){
+	protected ErrorFunction errorFunction;
+	
+	public TrainMethod(double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction){
 		this.setExpectedOutput(expectedOutput);
 		this.setTrainingSet(trainingSet);
+		this.errorFunction = errorFunction;
 	}
 	
 	public void setTrainingSet(double[][] trainingSet){
