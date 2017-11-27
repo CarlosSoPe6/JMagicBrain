@@ -3,7 +3,8 @@ package org.jmagicbrain.functions;
 import org.jmagicbrain.NeuralNetwork;
 
 /**
- *
+ *Clase abstracta padre de las clases que contengan la función para
+ * calcular el error
  */
 public abstract class ErrorFunction {
 

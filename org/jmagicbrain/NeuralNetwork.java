@@ -7,8 +7,12 @@ import org.jmagicbrain.initializers.WeightInitializer;
 
 import java.util.LinkedList;
 
+/**
+ * Clase principal, crea red neuronal.
+ * Para construirse es necesario usar su Builder
+ * de la forma: new NeuralNetwork(args).setActivationFunction(args).build();
+ */
 public class NeuralNetwork {
-
     private double[][] layers;
     private double[][][] weightsMatrix;
     private double numberOfWeights;
@@ -38,11 +42,17 @@ public class NeuralNetwork {
             }
         }
     }
-
+    /**
+     * Funcion que devuelve los pesos de la red neuronal
+     * @return double[][][] con los valores actuales de los pesos de la red neuronal
+     */
     public double[][][] getWeights(){
         return weightsMatrix;
     }
 
+    /**
+     * Clase utilizada para hcaer la construcción de la red neuronal
+     */
     public class NeuralNetworkBuilder {
         private ErrorFunction errorFunction;
         private ActivationFunction activationFunction;

@@ -2,6 +2,9 @@ package org.jmagicbrain.functions;
 
 import org.jmagicbrain.NeuralNetwork;
 
+/**
+ * Clase utilizada para calcular el error en Enjambre de Particulas
+ */
 public class MeanSquaredError extends ErrorFunction {
     /**
      * Inicia la instancia de ErrorFunction

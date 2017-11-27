@@ -1,5 +1,8 @@
 package org.jmagicbrain.initializers;
 
+/**
+ *Inicializador por defualt que se usa en la red neuronal
+ */
 public class DefaultInitializer implements WeightInitializer{
     @Override
     public void initialize(double[][][] weights) {
