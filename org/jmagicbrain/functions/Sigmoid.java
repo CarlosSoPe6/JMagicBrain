@@ -3,7 +3,7 @@ package org.jmagicbrain.functions;
 public class Sigmoid implements ActivationFunction {
     @Override
     public double func(double x) {
-        return 1 / (1 + Math.exp(-x));
+        return 1.0 / (1 + Math.exp(-x));
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.jmagicbrain.functions.ErrorFunction;
 import org.jmagicbrain.initializers.WeightInitializer;
 import org.jmagicbrain.trainmethod.TrainMethod;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 /**
@@ -27,6 +28,10 @@ public class NeuralNetwork {
         this.layers = new double[layersArray.length][];
         this.weightsMatrix = new double[layersArray.length - 1][][];
 
+        for(int i = 1; i < layersArray.length; i++){
+            numberOfWeights += (layersArray[i] * layersArray[i-1]) + layersArray[i];
+        }
+
         for(int i = 0; i < layersArray.length; i++){
             this.layers[i] = new double[layersArray[i] + 1];
             layers[i][layers[i].length - 1] = 1;
@@ -34,8 +39,14 @@ public class NeuralNetwork {
                 weightsMatrix[i-1] = new double[this.layers[i].length - 1][this.layers[i - 1].length];
             }
         }
-
         weightInitializer.initialize(weightsMatrix);
+
+        this.errorFunction = errorFunction;
+        this.trainingMethod = trainingMethod;
+        this.activationFunction = activationFunction;
+
+        errorFunction.setNeuralNetwork(this);
+        trainingMethod.setNeuralNetwork(this);
     }
 
     public int getNumberOfWeights() {
@@ -50,6 +61,26 @@ public class NeuralNetwork {
         return weightsMatrix;
     }
 
+    public void setWeights(double[][][] weights){
+        for(int i = 0; i < this.weightsMatrix.length; i++){
+            for(int j = 0; j < this.weightsMatrix[i].length; j++){
+                System.arraycopy(weightsMatrix[i][j], 0, this.weightsMatrix[i][j], 0, this.weightsMatrix[i][j].length);
+            }
+        }
+    }
+
+    public void setWeights(double[] weights){
+        int l = 0;
+        for (int i = 0; i < this.weightsMatrix.length; i++){
+            for(int j = 0; j < this.weightsMatrix[i].length; j++){
+                for(int k = 0; k < this.weightsMatrix[i][j].length; k++){
+                    this.weightsMatrix[i][j][k] = weights[l];
+                    l++;
+                }
+            }
+        }
+    }
+
     /**
      * Iguala los valores de la capa de entrada para poder evaluar
      * @param inputs los valores a evaluar. NORMALIZADOS
@@ -58,7 +89,7 @@ public class NeuralNetwork {
         if (inputs.length != layers[0].length){
             // TODO: Exception
         }
-        System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length);
+        System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length - 1);
     }
 
     /**
@@ -91,7 +122,7 @@ public class NeuralNetwork {
      * Entrena la red neuronal
      */
     public void train(){
-        // trainingMethod.train();
+        trainingMethod.train();
     }
 
     /**
@@ -101,14 +132,14 @@ public class NeuralNetwork {
         private ErrorFunction errorFunction;
         private ActivationFunction activationFunction;
         private TrainMethod trainingMethod;
-        private LinkedList<Integer> neuronQueue;
+        private LinkedList<Integer> neuronList;
         private WeightInitializer initializer;
 
         /**
          * Constructor de NeuralNetworkBuilder
          */
         public NeuralNetworkBuilder(){
-            neuronQueue = new LinkedList<Integer>();
+            neuronList = new LinkedList<Integer>();
         }
 
         /**
@@ -146,7 +177,7 @@ public class NeuralNetwork {
          * @return
          */
         public NeuralNetworkBuilder addLayer(int numberOfNeurons){
-            this.neuronQueue.add(numberOfNeurons);
+            this.neuronList.add(numberOfNeurons);
             return this;
         }
 
@@ -166,8 +197,8 @@ public class NeuralNetwork {
          * @throws InvalidNeuralNetworkArguments
          */
         public NeuralNetwork build() throws InvalidNeuralNetworkArguments{
-            Integer[] layers = new Integer[neuronQueue.size()];
-            neuronQueue.toArray(layers);
+            Integer[] layers = new Integer[neuronList.size()];
+            neuronList.toArray(layers);
             if(layers.length == 0){
                 throw new InvalidNeuralNetworkArguments("There are no layers");
             }

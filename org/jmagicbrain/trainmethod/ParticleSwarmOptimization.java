@@ -18,9 +18,10 @@ public class ParticleSwarmOptimization extends TrainMethod{
 
     private final double W;
     private final double congitiveLocalConstant;
-    public final double socialGlobalConstant;
+    private final double socialGlobalConstant;
+    private final double probDeath;
 
-    public ParticleSwarmOptimization(double congitiveLocalConstant, double socialGlobalConstant, int numberOfParticles, double maxX, double minX, int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction) {
+    public ParticleSwarmOptimization(double probDeath, double congitiveLocalConstant, double socialGlobalConstant, int numberOfParticles, double maxX, double minX, int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction) {
         super(maxEpochs, maxError, trainingSet, expectedOutput, errorFunction);
         this.numberOfParticles = numberOfParticles;
         this.maxX = maxX;
@@ -29,70 +30,100 @@ public class ParticleSwarmOptimization extends TrainMethod{
         this.congitiveLocalConstant = congitiveLocalConstant;
         this.socialGlobalConstant = socialGlobalConstant;
         this.swarm = new Particle[this.numberOfParticles];
-        bestGlobalError = Double.MAX_VALUE;
+        this.bestGlobalError = Double.MAX_VALUE;
+        this.probDeath = probDeath;
 
         this.random = new Random();
     }
 
+    private void shuffle(int[] order){
+        for (int i = 0; i < order.length; i++){
+            int tmp = order[i];
+            order[i] = order[random.nextInt(order.length)];
+            order[random.nextInt(order.length)] = tmp;
+        }
+    }
+
     @Override
     public void train() {
+        bestGlobalPosition = new double[neuralNetwork.getNumberOfWeights()];
         initParticles();
         int epoch = 0;
+        double die = 0;
         double errt = 0;
-        int[] sequence = new int[neuralNetwork.getNumberOfWeights()];
+        int[] sequence = new int[numberOfParticles];
         for (int i = 0; i < sequence.length; i++){
             sequence[i] = i;
         }
         double newError;
         double r1, r2;
-        boolean endEvaluation = false;
         Particle currentParticle;
-
 
         while (epoch < maxEpochs){
             if(bestGlobalError < maxError) break;
+            shuffle(sequence);
             for(int i = 0; i < sequence.length; i++){
                 currentParticle = swarm[sequence[i]];
                 for(int j = 0; j < neuralNetwork.getNumberOfWeights(); j++){
                     r1 = random.nextDouble();
                     r2 = random.nextDouble();
 
-                    currentParticle.velocity[j] = (this.W * currentParticle.velocity[j]) +
-                            ((r1 * this.congitiveLocalConstant) * (currentParticle.bestPosition[j] - currentParticle.position[j])) +
-                            ((r2 * this.socialGlobalConstant) * (bestGlobalPosition[j] - currentParticle.position[j]));
-                    currentParticle.position[j] = currentParticle.position[j] + currentParticle.velocity[i];
+                    currentParticle.velocity[j] =
+                            (this.W * currentParticle.velocity[j]) +
+                            (r1 * this.congitiveLocalConstant * (currentParticle.bestPosition[j] - currentParticle.position[j])) +
+                            (r2 * this.socialGlobalConstant * (bestGlobalPosition[j] - currentParticle.position[j]));
+                    currentParticle.position[j] += currentParticle.velocity[i];
                     if(currentParticle.position[j] < minX) currentParticle.position[j] = minX;
                     if(currentParticle.position[j] > maxX) currentParticle.position[j] = maxX;
                 }
-                newError = errorFunction.getError(trainingSet, expectedOutput);
-                if(newError < currentParticle.bestError){
-                    currentParticle.bestError = newError;
+
+                neuralNetwork.setWeights(currentParticle.position);
+                currentParticle.error = errorFunction.getError(trainingSet, expectedOutput);
+
+                if(currentParticle.error < currentParticle.bestError){
+                    currentParticle.bestError = currentParticle.error;
                     System.arraycopy(currentParticle.position, 0 ,currentParticle.bestPosition, 0, currentParticle.position.length);
                 }
 
-                if(newError < bestGlobalError){
-                    bestGlobalError = newError;
+                if(currentParticle.error < bestGlobalError){
+                    bestGlobalError = currentParticle.error;
                     System.arraycopy(currentParticle.position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
                 }
 
                 // TODO: Die particle
+                die = random.nextDouble();
+                if(die < this.probDeath){
+                    for(int k = 0; i < numberOfParticles; i++){
+                        currentParticle.position[k] = (maxX - minX) * random.nextDouble() - minX;
+                        currentParticle.error = errorFunction.getError(trainingSet, expectedOutput);
+                        currentParticle.bestError = currentParticle.error;
 
-                epoch++;
+                        if(currentParticle.error < bestGlobalError){
+                            bestGlobalError = currentParticle.error;
+                            System.arraycopy(currentParticle.position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
+                        }
+                    }
+                }
+
             }
-
+            epoch++;
         }
+
+        System.out.printf("Best error: %f\n", bestGlobalError);
+
+
     }
 
     private void initParticles(){
-        double hi = 0.1 * maxX;
-        double lo = 0.1 * minX;
+        double hi = 0.05 * maxX;
+        double lo = 0.05 * minX;
         double[] position = new double[neuralNetwork.getNumberOfWeights()];
         double[] velocity = new double[neuralNetwork.getNumberOfWeights()];
         double error = 0.0;
         for(int i = 0; i < numberOfParticles; i++){
             for(int j = 0; j < position.length; j++) {
                 position[j] = (maxX - minX) * random.nextDouble() - minX;
-                error = this.errorFunction.getError(trainingSet, expectedOutput);
+                error = super.errorFunction.getError(trainingSet, expectedOutput);
                 velocity[j] = (hi- lo) * random.nextDouble() - lo;
             }
             swarm[i] = new Particle(position, error, velocity, position, error);
