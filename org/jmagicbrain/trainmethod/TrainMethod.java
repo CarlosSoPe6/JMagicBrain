@@ -11,11 +11,16 @@ public abstract class TrainMethod
 	protected double[][] expectedOutput;
 	
 	protected ErrorFunction errorFunction;
+
+	protected final int maxEpochs;
+	protected final double maxError;
 	
-	public TrainMethod(double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction){
+	public TrainMethod(int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction){
 		this.setExpectedOutput(expectedOutput);
 		this.setTrainingSet(trainingSet);
 		this.errorFunction = errorFunction;
+		this.maxEpochs = maxEpochs;
+		this.maxError = maxError;
 	}
 	
 	public void setTrainingSet(double[][] trainingSet){
