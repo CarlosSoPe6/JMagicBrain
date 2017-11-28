@@ -26,7 +26,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
         this.numberOfParticles = numberOfParticles;
         this.maxX = maxX;
         this.minX = minX;
-        this.W = 0.7;
+        this.W = 0.729;
         this.congitiveLocalConstant = congitiveLocalConstant;
         this.socialGlobalConstant = socialGlobalConstant;
         this.swarm = new Particle[this.numberOfParticles];

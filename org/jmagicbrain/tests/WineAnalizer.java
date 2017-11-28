@@ -18,6 +18,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class WineAnalizer {
@@ -31,7 +32,7 @@ public class WineAnalizer {
         double[][] expected = new double[dslen][3];
 
         try {
-            in = new FileReader("C:\\Desarrollo\\trainingSet.csv");
+            in = new FileReader("C:\\Desarrollo\\hhh.csv");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } finally {
@@ -58,13 +59,27 @@ public class WineAnalizer {
 
         for(int i = 0; i < dslen; i++){
             CSVRecord e = recordArrayList.get(i);
-            for(int j = 0; j < 13; j++){
-                dataset[i][j] = Normalizers.normalizeRange(Double.parseDouble(e.get(j)), NormalizationMin[j], NormalizationMax[j]);
+            for(int j = 1; j <= 13; j++){
+                dataset[i][j - 1] = Normalizers.normalizeRange(Double.parseDouble(e.get(j)), NormalizationMin[j - 1], NormalizationMax[j - 1]);
                 //dataset[i][j] = Double.parseDouble(e.get(j));
             }
 
-            for(int j = 0; j < 3; j++){
-                expected[i][j] = Double.parseDouble(e.get(j + 12));
+            switch (Integer.parseInt(e.get(0))){
+                case 1:
+                    expected[i][0] = 1.0;
+                    expected[i][1] = 0.0;
+                    expected[i][2] = 0.0;
+                    break;
+                case 2:
+                    expected[i][0] = 0.0;
+                    expected[i][1] = 1.0;
+                    expected[i][2] = 0.0;
+                    break;
+                case 3:
+                    expected[i][0] = 0.0;
+                    expected[i][1] = 0.0;
+                    expected[i][2] = 1.0;
+                    break;
             }
         }
 
@@ -73,13 +88,13 @@ public class WineAnalizer {
         WeightInitializer weightInitializer = new DefaultInitializer();
         TrainMethod trainMethod = new ParticleSwarmOptimization(
                 0.005,
-                0.01,
+                1.49445,
+                1.49445,
+                12,
+                10.0,
+                -10.0,
+                1000,
                 0.1,
-                15,
-                5,
-                -5,
-                10000,
-                0.06,
                 dataset,
                 expected,
                 errorFunction
@@ -98,5 +113,9 @@ public class WineAnalizer {
         System.out.println("Starting train");
         nn.train();
         System.out.println("Ending train");
+
+        nn.setInputLayer(dataset[dataset.length/2 - 10]);
+        nn.think();
+        System.out.println(Arrays.toString(nn.getOutputLayer()));
     }
 }
