@@ -80,3 +80,4 @@ public class BackPropagation extends TrainMethod{
 
     }
 }
+ 
