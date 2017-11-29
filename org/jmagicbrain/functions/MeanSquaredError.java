@@ -14,10 +14,10 @@ public class MeanSquaredError extends ErrorFunction {
             neuralNetwork.think();
             output = neuralNetwork.getOutputLayer();
             for(int j = 0; j < objective[i].length; j++){
-                sumSquaredError += (output[j] - objective[i][j]) * (output[j] - objective[i][j]);
+                sumSquaredError += ((output[j] - objective[i][j]) * (output[j] - objective[i][j]));
             }
         }
 
-        return sumSquaredError / ((double) trainingSet.length);
+        return sumSquaredError / trainingSet.length;
     }
 }
