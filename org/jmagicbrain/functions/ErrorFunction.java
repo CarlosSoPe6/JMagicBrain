@@ -2,6 +2,8 @@ package org.jmagicbrain.functions;
 
 import org.jmagicbrain.NeuralNetwork;
 
+import java.util.List;
+
 /**
  *Clase abstracta padre de las clases que contengan la función para
  * calcular el error
@@ -27,5 +29,5 @@ public abstract class ErrorFunction {
      * @param objective El resultado esperadao para cada caso
      * @return El error
      */
-    public abstract double getError(double[][] trainingSet, double[][] objective);
+    public abstract double getError(List<List<Double>> trainingSet, List<List<Double>> objective);
 }

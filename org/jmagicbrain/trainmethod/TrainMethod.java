@@ -1,14 +1,16 @@
 package org.jmagicbrain.trainmethod;
 
 import org.jmagicbrain.NeuralNetwork;
+import org.jmagicbrain.functions.ActivationFunction;
 import org.jmagicbrain.functions.ErrorFunction;
+import java.util.List;
 
 public abstract class TrainMethod
 {
 	
 	protected NeuralNetwork neuralNetwork;
-	protected double[][] trainingSet;
-	protected double[][] expectedOutput;
+	protected List<List<Double>> trainingSet;
+	protected List<List<Double>> expectedOutput;
 	
 	protected ErrorFunction errorFunction;
 
@@ -23,21 +25,21 @@ public abstract class TrainMethod
 		this.maxError = maxError;
 	}
 	
-	public void setTrainingSet(double[][] trainingSet){
+	public void setTrainingSet(List<List<Double>> trainingSet){
 		
 		this.trainingSet = trainingSet;
 	}
 	
-	public void setExpectedOutput(double[][] expectedOutput){
+	public void setExpectedOutput(List<List<Double>> expectedOutput){
 		
 		this.expectedOutput = expectedOutput;
 	}
 	
-	public double[][] getTrainingSet(){
+	public List<List<Double>> getTrainingSet(){
 		return this.trainingSet;
 	}
-	
-	public double[][] getExpectedOutput(){
+
+	public List<List<Double>> getExpectedOutput(){
 		return this.expectedOutput;
 	}
 	

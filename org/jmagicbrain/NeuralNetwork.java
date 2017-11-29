@@ -100,6 +100,14 @@ public class NeuralNetwork {
         return this.layers[layers.length - 1];
     }
 
+    public double[][] getLayers(){
+        return this.layers;
+    }
+
+    public ActivationFunction getActivationFunction() {
+        return activationFunction;
+    }
+
     /**
      * Evalua la red neuronal
      */
