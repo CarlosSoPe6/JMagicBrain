@@ -2,6 +2,10 @@ package org.jmagicbrain.trainmethod;
 
 import org.jmagicbrain.functions.ErrorFunction;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Random;
 
 public class ParticleSwarmOptimization extends TrainMethod{
@@ -46,6 +50,13 @@ public class ParticleSwarmOptimization extends TrainMethod{
 
     @Override
     public void train() {
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("file.csv", "UTF-8");
+        } catch (FileNotFoundException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        StringBuilder sb = new StringBuilder();
         bestGlobalPosition = new double[neuralNetwork.getNumberOfWeights()];
         initParticles();
         int epoch = 0;
@@ -90,11 +101,10 @@ public class ParticleSwarmOptimization extends TrainMethod{
                     System.arraycopy(currentParticle.position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
                 }
 
-                // TODO: Die particle
                 die = random.nextDouble();
                 if(die < this.probDeath){
                     for(int k = 0; i < numberOfParticles; i++){
-                        currentParticle.position[k] = (maxX - minX) * random.nextDouble() - minX;
+                        currentParticle.position[k] = (maxX - minX) * random.nextDouble() + minX;
                         currentParticle.error = errorFunction.getError(trainingSet, expectedOutput);
                         currentParticle.bestError = currentParticle.error;
 
@@ -105,12 +115,16 @@ public class ParticleSwarmOptimization extends TrainMethod{
                     }
                 }
 
+                sb.append(String.format("%f\n", currentParticle.error));
             }
             epoch++;
         }
 
+        System.out.println(Arrays.toString(bestGlobalPosition));
         System.out.printf("Best error: %f\n", bestGlobalError);
 
+        writer.write(sb.toString());
+        writer.close();
 
     }
 
@@ -122,14 +136,15 @@ public class ParticleSwarmOptimization extends TrainMethod{
         double error = 0.0;
         for(int i = 0; i < numberOfParticles; i++){
             for(int j = 0; j < position.length; j++) {
-                position[j] = (maxX - minX) * random.nextDouble() - minX;
+                position[j] = (maxX - minX) * random.nextDouble() + minX;
                 error = super.errorFunction.getError(trainingSet, expectedOutput);
-                velocity[j] = (hi- lo) * random.nextDouble() - lo;
+                velocity[j] = (hi- lo) * random.nextDouble() + lo;
             }
             swarm[i] = new Particle(position, error, velocity, position, error);
             if(error < bestGlobalError){
                 bestGlobalError = error;
                 System.arraycopy(position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
+                System.out.println(Arrays.toString(bestGlobalPosition));
             }
         }
     }
@@ -142,14 +157,11 @@ public class ParticleSwarmOptimization extends TrainMethod{
         private double bestError;
 
         private Particle(double[] position, double error, double[] velocity, double[] bestPosition, double bestError) {
-            this.position = new double[position.length];
-            this.velocity = new double[velocity.length];
-            this.bestPosition = new double[bestPosition.length];
+            this.position = position.clone();
+            this.velocity = velocity.clone();
+            this.bestPosition = bestPosition.clone();
 
-            System.arraycopy(this.position, 0, position, 0, position.length);
             this.error = error;
-            System.arraycopy(this.velocity, 0, velocity, 0, velocity.length);
-            System.arraycopy(this.bestPosition, 0, bestPosition, 0, bestPosition.length);
             this.bestError = bestError;
         }
     }
