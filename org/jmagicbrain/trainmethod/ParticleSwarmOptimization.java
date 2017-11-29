@@ -77,7 +77,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
                 }
 
                 for(int j = 0; j < neuralNetwork.getNumberOfWeights(); j++) {
-                    newPos[j] = currentParticle.position[j] + newVel[i];
+                    newPos[j] = currentParticle.position[j] + newVel[j];
                     if(newPos[j] < minX) newPos[j] = minX;
                     else if(newPos[j] > maxX) newPos[j] = maxX;
                 }

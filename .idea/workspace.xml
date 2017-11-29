@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53eb736b-48c5-46d4-b3de-c20f43321215" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,8 +17,8 @@
       <file leaf-file-name="ParticleSwarmOptimization.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
+            <state relative-caret-position="104">
+              <caret line="79" column="70" lean-forward="false" selection-start-line="79" selection-start-column="70" selection-end-line="79" selection-end-column="70" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -749,8 +748,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="58" column="33" lean-forward="true" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="33" />
+        <state relative-caret-position="104">
+          <caret line="79" column="70" lean-forward="false" selection-start-line="79" selection-start-column="70" selection-end-line="79" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
