@@ -87,10 +87,10 @@ public class WineAnalizer {
         ErrorFunction errorFunction = new MeanSquaredError();
         WeightInitializer weightInitializer = new DefaultInitializer();
         TrainMethod trainMethod = new ParticleSwarmOptimization(
-                0.005,
-                1.49445,
-                1.49445,
-                12,
+                0.01,
+                1.237,
+                1.237,
+                15,
                 10.0,
                 -10.0,
                 1000,
@@ -114,7 +114,7 @@ public class WineAnalizer {
         nn.train();
         System.out.println("Ending train");
 
-        nn.setInputLayer(dataset[dataset.length/2 - 10]);
+        nn.setInputLayer(dataset[dataset.length - 1]);
         nn.think();
         System.out.println(Arrays.toString(nn.getOutputLayer()));
     }
