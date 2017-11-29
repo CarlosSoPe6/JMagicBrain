@@ -3,8 +3,8 @@ package org.jmagicbrain.trainmethod;
 import org.jmagicbrain.NeuralNetwork;
 import org.jmagicbrain.functions.ErrorFunction;
 
-public class BackPropagation extends TrainMethod{
-
+public class BackPropagation{
+    /*
     private double[][][] previousDeltasMatrix;
     private double[] errorVector;
     private double[][] sigmas;
@@ -64,5 +64,5 @@ public class BackPropagation extends TrainMethod{
                 }
             }
         }
-    }
+    }*/
 }

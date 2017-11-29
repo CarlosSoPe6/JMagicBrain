@@ -20,6 +20,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class WineAnalizer {
     public static void main(String[] args) {
@@ -28,8 +29,8 @@ public class WineAnalizer {
 
         int dslen = 178;
         Reader in = null;
-        double[][] dataset = new double[dslen][13];
-        double[][] expected = new double[dslen][3];
+        List<List<Double>> dataset = new ArrayList<>(dslen);
+        List<List<Double>> expected = new ArrayList<>(dslen);
 
         try {
             in = new FileReader("C:\\Desarrollo\\hhh.csv");
@@ -59,28 +60,32 @@ public class WineAnalizer {
 
         for(int i = 0; i < dslen; i++){
             CSVRecord e = recordArrayList.get(i);
-            for(int j = 1; j <= 13; j++){
-                dataset[i][j - 1] = Normalizers.normalizeRange(Double.parseDouble(e.get(j)), NormalizationMin[j - 1], NormalizationMax[j - 1]);
+            List<Double> entry = new ArrayList<>(NormalizationMax.length);
+            for(int j = 0; j < 13; j++){
+                entry.add(j, Normalizers.normalizeRange(Double.parseDouble(e.get(j + 1)), NormalizationMin[j], NormalizationMax[j]));
                 //dataset[i][j] = Double.parseDouble(e.get(j));
             }
+            dataset.add(i, entry);
 
+            List<Double> expetedEntry = new ArrayList<>(3);
             switch (Integer.parseInt(e.get(0))){
                 case 1:
-                    expected[i][0] = 1.0;
-                    expected[i][1] = 0.0;
-                    expected[i][2] = 0.0;
+                    expetedEntry.add(0, 1.0);
+                    expetedEntry.add(1, 0.0);
+                    expetedEntry.add(2, 0.0);
                     break;
                 case 2:
-                    expected[i][0] = 0.0;
-                    expected[i][1] = 1.0;
-                    expected[i][2] = 0.0;
+                    expetedEntry.add(0, 0.0);
+                    expetedEntry.add(1, 1.0);
+                    expetedEntry.add(2, 0.0);
                     break;
                 case 3:
-                    expected[i][0] = 0.0;
-                    expected[i][1] = 0.0;
-                    expected[i][2] = 1.0;
+                    expetedEntry.add(0, 0.0);
+                    expetedEntry.add(1, 0.0);
+                    expetedEntry.add(2, 1.0);
                     break;
             }
+            expected.add(i, expetedEntry);
         }
 
         ActivationFunction activationFunction = new Sigmoid();
@@ -114,7 +119,13 @@ public class WineAnalizer {
         nn.train();
         System.out.println("Ending train");
 
-        nn.setInputLayer(dataset[dataset.length - 1]);
+        double[] input = new double[dataset.get(0).size()];
+
+        for (int i = 0; i < input.length; i++){
+            input[i] = dataset.get(0).get(i);
+        }
+
+        nn.setInputLayer(input);
         nn.think();
         System.out.println(Arrays.toString(nn.getOutputLayer()));
     }

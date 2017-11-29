@@ -17,7 +17,7 @@ public abstract class TrainMethod
 	protected final int maxEpochs;
 	protected final double maxError;
 	
-	public TrainMethod(int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction){
+	public TrainMethod(int maxEpochs, double maxError, List<List<Double>> trainingSet, List<List<Double>> expectedOutput, ErrorFunction errorFunction){
 		this.setExpectedOutput(expectedOutput);
 		this.setTrainingSet(trainingSet);
 		this.errorFunction = errorFunction;

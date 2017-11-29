@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class ParticleSwarmOptimization extends TrainMethod{
@@ -25,7 +26,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
     private final double socialGlobalConstant;
     private final double probDeath;
 
-    public ParticleSwarmOptimization(double probDeath, double congitiveLocalConstant, double socialGlobalConstant, int numberOfParticles, double maxX, double minX, int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction) {
+    public ParticleSwarmOptimization(double probDeath, double congitiveLocalConstant, double socialGlobalConstant, int numberOfParticles, double maxX, double minX, int maxEpochs, double maxError, List<List<Double>> trainingSet, List<List<Double>> expectedOutput, ErrorFunction errorFunction) {
         super(maxEpochs, maxError, trainingSet, expectedOutput, errorFunction);
         this.numberOfParticles = numberOfParticles;
         this.maxX = maxX;
