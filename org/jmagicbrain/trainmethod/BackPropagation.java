@@ -3,10 +3,15 @@ package org.jmagicbrain.trainmethod;
 import org.jmagicbrain.NeuralNetwork;
 import org.jmagicbrain.functions.ErrorFunction;
 
+<<<<<<< HEAD
 import java.util.List;
 
 public class BackPropagation extends TrainMethod{
 
+=======
+public class BackPropagation{
+    /*
+>>>>>>> 0520c15a1665a21303d549d5db5182d30d8f6cb4
     private double[][][] previousDeltasMatrix;
     private double[] errorVector;
     private double[][] sigmas;
@@ -72,6 +77,7 @@ public class BackPropagation extends TrainMethod{
                 }
             }
         }
+<<<<<<< HEAD
         iterations ++;
     }
 
@@ -80,4 +86,7 @@ public class BackPropagation extends TrainMethod{
         this.sigmas = new double[neuralNetwork.getLayers().length - 1][];
 
     }
+=======
+    }*/
+>>>>>>> 0520c15a1665a21303d549d5db5182d30d8f6cb4
 }
