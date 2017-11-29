@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53eb736b-48c5-46d4-b3de-c20f43321215" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/functions/BPErrorFunction.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/functions/BPErrorFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" />
-    </list>
+    <list default="true" id="53eb736b-48c5-46d4-b3de-c20f43321215" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,8 +16,10 @@
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="104">
-              <caret line="79" column="70" lean-forward="false" selection-start-line="79" selection-start-column="70" selection-end-line="79" selection-end-column="70" />
-              <folding />
+              <caret line="68" column="70" lean-forward="false" selection-start-line="68" selection-start-column="70" selection-end-line="68" selection-end-column="70" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -489,7 +482,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1989">
           <caret line="117" column="24" lean-forward="false" selection-start-line="117" selection-start-column="24" selection-end-line="117" selection-end-column="24" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -535,7 +530,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="50" column="0" lean-forward="true" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -736,8 +733,10 @@
     <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="104">
-          <caret line="79" column="70" lean-forward="false" selection-start-line="79" selection-start-column="70" selection-end-line="79" selection-end-column="70" />
-          <folding />
+          <caret line="68" column="70" lean-forward="false" selection-start-line="68" selection-start-column="70" selection-end-line="68" selection-end-column="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
