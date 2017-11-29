@@ -3,6 +3,8 @@ package org.jmagicbrain.trainmethod;
 import org.jmagicbrain.NeuralNetwork;
 import org.jmagicbrain.functions.ErrorFunction;
 
+import java.util.List;
+
 public class BackPropagation extends TrainMethod{
 
     private double[][][] previousDeltasMatrix;
@@ -12,7 +14,7 @@ public class BackPropagation extends TrainMethod{
     private final double learningRate;
     private final double momentum;
 
-    public BackPropagation(double learningRate, double momentum, int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction) {
+    public BackPropagation(double learningRate, double momentum, int maxEpochs, double maxError, List<List<Double>> trainingSet, List<List<Double>> expectedOutput, ErrorFunction errorFunction) {
         super(maxEpochs, maxError, trainingSet, expectedOutput, errorFunction);
         this.momentum = momentum;
         this.learningRate = learningRate;
@@ -27,42 +29,54 @@ public class BackPropagation extends TrainMethod{
     public void train() {
         int epocs = 0;
         int hits = 0;
+        double[][] layers = neuralNetwork.getLayers();
+        double[] expected = new double[expectedOutput.size()];
+        int ite = 0;
+        for(List<Double> l: expectedOutput) {
+            for (double d : l) {
+                expected[ite] = d;
+            }
+        }
+
         while (epocs < maxEpochs && hits < super.trainingSet.size()) {
             //Probaly doesnt works
-            errorFunction.getError();
+            errorFunction.getError(super.trainingSet, super.expectedOutput);
             double sigma = 0;
             double delta;
 
             // Sigma for output, the last row
             for (int i = 0; i < sigmas[sigmas.length - 1].length; i++) {
-                sigmas[sigmas.length - 1][i] = (super.neuralNetwork.setLayer[sigmas.length][i] - expectedOutput[i]) * dSigmoid(layers[sigmas.length][i]);
+                sigmas[sigmas.length - 1][i] = (layers[sigmas.length][i] - expected[i]) * neuralNetwork.getActivationFunction().deriv(layers[sigmas.length][i]);
             }
 
             // Others sigmas
             for (int i = sigmas.length - 2; i >= 0; i--) {
                 for (int j = 0; j < sigmas[i].length; j++) {
                     for (int k = 0; k < sigmas[i + 1].length; k++) {
-                        //System.out.printf("i: %d, j: %d, k: %d \n", i, j, k);
-                        // TODO: Check this works properly
-                        sigma += weightsMatrix[i][j][k] * sigmas[i + 1][k];
+                        sigma += neuralNetwork.getWeights()[i][j][k] * sigmas[i + 1][k];
                     }
-                    sigmas[i][j] = sigma * dSigmoid(layers[i + 1][j]);
+                    sigmas[i][j] = sigma * neuralNetwork.getActivationFunction().deriv(layers[i + 1][j]);
                     sigma = 0;
                 }
             }
 
             // Update weights
-            for (int i = 0; i < weightsMatrix.length; i++) {
-                for (int j = 0; j < weightsMatrix[i].length; j++) {
-                    for (int k = 0; k < weightsMatrix[i][j].length; k++) {
-                        delta = (LEARNING_RATE * layers[i][k] * sigmas[i][j])
-                                + (MOMENTUM * previousDeltasMatrix[i][j][k]);
+            for (int i = 0; i < neuralNetwork.getWeights().length; i++) {
+                for (int j = 0; j < neuralNetwork.getWeights()[i].length; j++) {
+                    for (int k = 0; k < neuralNetwork.getWeights()[i][j].length; k++) {
+                        delta = (learningRate * layers[i][k] * sigmas[i][j])
+                                + (momentum * previousDeltasMatrix[i][j][k]);
 
-                        weightsMatrix[i][j][k] -= delta;
+                        neuralNetwork.getWeights()[i][j][k] -= delta;
                         previousDeltasMatrix[i][j][k] = delta;
                     }
                 }
             }
         }
+    }
+
+    private void sigmasInit() {
+        this.sigmas = new double[neuralNetwork.getLayers().length - 1][];
+
     }
 }
