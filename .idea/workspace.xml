@@ -3,14 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="53eb736b-48c5-46d4-b3de-c20f43321215" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/functions/BPErrorFunction.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/functions/BPErrorFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/TrainMethod.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/TrainMethod.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,8 +18,8 @@
       <file leaf-file-name="ParticleSwarmOptimization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+            <state relative-caret-position="-680">
+              <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -37,7 +30,7 @@
       <file leaf-file-name="Iris.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
+            <state relative-caret-position="1240">
               <caret line="86" column="18" lean-forward="false" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -46,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MeanSquaredError.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MeanSquaredError.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+            <state relative-caret-position="119">
+              <caret line="10" column="90" lean-forward="true" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
               <folding />
             </state>
           </provider>
@@ -68,46 +61,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WineAnalizer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="WineAnalizer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
-              <caret line="63" column="30" lean-forward="true" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BackPropagation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="28" lean-forward="false" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
-              <folding>
-                <marker date="1511970280328" expanded="false" signature="767:778" ph=" { " />
-                <marker date="1511970280328" expanded="false" signature="816:822" ph=" }" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AgaricusLepiota.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="88" column="18" lean-forward="false" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ErrorFunction.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/org/jmagicbrain/functions/ErrorFunction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="4" column="22" lean-forward="true" selection-start-line="4" selection-start-column="22" selection-end-line="4" selection-end-column="22" />
+            <state relative-caret-position="1292">
+              <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -168,8 +126,8 @@
         <option value="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" />
         <option value="$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java" />
         <option value="$PROJECT_DIR$/org/jmagicbrain/functions/BPErrorFunction.java" />
-        <option value="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
         <option value="$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java" />
+        <option value="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
       </list>
     </option>
   </component>
@@ -452,11 +410,11 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4243421" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4243421" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2677761" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2677761" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -666,13 +624,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="103" column="11" lean-forward="false" selection-start-line="103" selection-start-column="11" selection-end-line="103" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/org/jmagicbrain/utils/Normalizers.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -749,16 +700,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="86" column="18" lean-forward="false" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/org/jmagicbrain/functions/BPErrorFunction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -769,28 +710,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java">
+    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="63" column="30" lean-forward="true" selection-start-line="63" selection-start-column="30" selection-end-line="63" selection-end-column="30" />
+        <state relative-caret-position="119">
+          <caret line="10" column="90" lean-forward="true" selection-start-line="10" selection-start-column="90" selection-end-line="10" selection-end-column="90" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_144/src.zip!/java/util/Random.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="530" column="18" lean-forward="false" selection-start-line="530" selection-start-column="18" selection-end-line="530" selection-end-column="18" />
+          <folding>
+            <element signature="e#21068#21069#0" expanded="true" />
+            <element signature="e#21142#21143#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+        <state relative-caret-position="-680">
+          <caret line="33" column="20" lean-forward="false" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/functions/MeanSquaredError.java">
+    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/Iris.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="18" column="25" lean-forward="false" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
+        <state relative-caret-position="1240">
+          <caret line="86" column="18" lean-forward="false" selection-start-line="86" selection-start-column="18" selection-end-line="86" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="96" column="20" lean-forward="false" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
           <folding />
         </state>
       </provider>
