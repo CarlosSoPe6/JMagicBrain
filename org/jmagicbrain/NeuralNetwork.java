@@ -5,6 +5,7 @@ import org.jmagicbrain.functions.ActivationFunction;
 import org.jmagicbrain.functions.ErrorFunction;
 import org.jmagicbrain.initializers.WeightInitializer;
 import org.jmagicbrain.trainmethod.TrainMethod;
+import java.util.List;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -87,6 +88,17 @@ public class NeuralNetwork {
      */
     public void setInputLayer(double ... inputs){
         if (inputs.length != layers[0].length){
+            // TODO: Exception
+        }
+        System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length - 1);
+    }
+
+    /**
+     * Iguala los valores de la capa de entrada para poder evaluar
+     * @param inputs los valores a evaluar. NORMALIZADOS
+     */
+    public void setInputLayer(List<Double> inputs){
+        if (inputs.size() != layers[0].length){
             // TODO: Exception
         }
         System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length - 1);
