@@ -19,7 +19,7 @@ public class BackPropagation extends TrainMethod{
         this.momentum = momentum;
         this.learningRate = learningRate;
     }
-
+ 
     @Override
     public void setNeuralNetwork(NeuralNetwork neuralNetwork) {
         super.setNeuralNetwork(neuralNetwork);
