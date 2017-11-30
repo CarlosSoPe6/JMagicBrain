@@ -9,6 +9,7 @@ import org.jmagicbrain.functions.MeanSquaredError;
 import org.jmagicbrain.functions.Sigmoid;
 import org.jmagicbrain.initializers.DefaultInitializer;
 import org.jmagicbrain.initializers.WeightInitializer;
+import org.jmagicbrain.trainmethod.BackPropagation;
 import org.jmagicbrain.trainmethod.ParticleSwarmOptimization;
 import org.jmagicbrain.trainmethod.TrainMethod;
 import org.jmagicbrain.utils.Normalizers;
@@ -71,18 +72,28 @@ public class AgaricusLepiota {
         WeightInitializer weightInitializer = new DefaultInitializer();
         TrainMethod trainMethod = new ParticleSwarmOptimization.ParticleSwarmOptimizationBuilder()
                 .setProbDeath(0.01)
-                .setW(0.3999)
-                .setCongitiveLocalConstant(0.1599)
-                .setSocialGlobalConstant(0.1599)
-                .setNumberOfParticles(500)
-                .setMaxX(15)
-                .setMinX(-15)
+                .setW(0.20945)
+                .setCongitiveLocalConstant(0.12005)
+                .setSocialGlobalConstant(0.12005)
+                .setNumberOfParticles(3000)
+                .setMaxX(50.0)
+                .setMinX(-50.0)
                 .setMaxEpochs(1000)
-                .setMaxError(0.09)
+                .setMaxError(0.1)
                 .setTrainingSet(ds)
                 .setExpectedOutput(expected)
                 .setErrorFunction(errorFunction)
                 .build();
+
+        /*TrainMethod trainMethod = new BackPropagation.BackPropagationBuilder()
+                .setErrorFunction(errorFunction)
+                .setMaxEpochs(500)
+                .setMaxError(0.01)
+                .setMomentum(0.65)
+                .setLearningRate(0.4)
+                .setTrainingSet(ds)
+                .setExpectedOutput(expected)
+                .build();*/
 
         NeuralNetwork nn = new NeuralNetwork.NeuralNetworkBuilder()
                 .setActivationFunction(activationFunction)

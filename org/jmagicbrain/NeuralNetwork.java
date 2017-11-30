@@ -20,10 +20,10 @@ public class NeuralNetwork {
     private double[][][] weightsMatrix;
 
     private int numberOfWeights;
-    private WeightInitializer initializer;
     private ErrorFunction errorFunction;
     private ActivationFunction activationFunction;
     private TrainMethod trainingMethod;
+    private Integer[] layersArray;
 
     private NeuralNetwork(WeightInitializer weightInitializer, ErrorFunction errorFunction, ActivationFunction activationFunction, TrainMethod trainingMethod, Integer ... layersArray){
         this.layers = new double[layersArray.length][];
@@ -40,6 +40,9 @@ public class NeuralNetwork {
                 weightsMatrix[i-1] = new double[this.layers[i].length - 1][this.layers[i - 1].length];
             }
         }
+
+        this.layersArray = layersArray;
+
         weightInitializer.initialize(weightsMatrix);
 
         this.errorFunction = errorFunction;
@@ -78,6 +81,10 @@ public class NeuralNetwork {
         }
     }
 
+    public Integer[] getLayersArray() {
+        return layersArray;
+    }
+
     /**
      * Establece los pesos de la matriz
      * @param weights vector de pesos
@@ -100,17 +107,6 @@ public class NeuralNetwork {
      */
     public void setInputLayer(double ... inputs){
         if (inputs.length != layers[0].length){
-            // TODO: Exception
-        }
-        System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length - 1);
-    }
-
-    /**
-     * Iguala los valores de la capa de entrada para poder evaluar
-     * @param inputs los valores a evaluar. NORMALIZADOS
-     */
-    public void setInputLayer(List<Double> inputs){
-        if (inputs.size() != layers[0].length){
             // TODO: Exception
         }
         System.arraycopy(inputs, 0, this.layers[0], 0, this.layers[0].length - 1);

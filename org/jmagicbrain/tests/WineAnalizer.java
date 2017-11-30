@@ -3,12 +3,10 @@ package org.jmagicbrain.tests;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.jmagicbrain.NeuralNetwork;
-import org.jmagicbrain.functions.ActivationFunction;
-import org.jmagicbrain.functions.ErrorFunction;
-import org.jmagicbrain.functions.MeanSquaredError;
-import org.jmagicbrain.functions.Sigmoid;
+import org.jmagicbrain.functions.*;
 import org.jmagicbrain.initializers.DefaultInitializer;
 import org.jmagicbrain.initializers.WeightInitializer;
+import org.jmagicbrain.trainmethod.BackPropagation;
 import org.jmagicbrain.trainmethod.ParticleSwarmOptimization;
 import org.jmagicbrain.trainmethod.TrainMethod;
 import org.jmagicbrain.utils.Normalizers;
@@ -62,7 +60,6 @@ public class WineAnalizer {
             CSVRecord e = recordArrayList.get(i);
             for(int j = 0; j < 13; j++){
                 dataset[i][j] = (Normalizers.normalizeRange(Double.parseDouble(e.get(j + 1)), NormalizationMin[j], NormalizationMax[j]));
-                //dataset[i][j] = Double.parseDouble(e.get(j));
             }
 
 
@@ -82,19 +79,28 @@ public class WineAnalizer {
         ActivationFunction activationFunction = new Sigmoid();
         ErrorFunction errorFunction = new MeanSquaredError();
         WeightInitializer weightInitializer = new DefaultInitializer();
-        TrainMethod trainMethod = new ParticleSwarmOptimization.ParticleSwarmOptimizationBuilder()
+        /*TrainMethod trainMethod = new ParticleSwarmOptimization.ParticleSwarmOptimizationBuilder()
                 .setProbDeath(0.01)
-                .setW(0.3999)
-                .setCongitiveLocalConstant(0.1599)
-                .setSocialGlobalConstant(0.1599)
-                .setNumberOfParticles(2000)
+                .setW(0.17085)
+                .setCongitiveLocalConstant(0.09605)
+                .setSocialGlobalConstant(0.09605)
+                .setNumberOfParticles(500)
                 .setMaxX(15)
                 .setMinX(-15)
-                .setMaxEpochs(500)
-                .setMaxError(0.09)
+                .setMaxEpochs(1000)
+                .setMaxError(0.1)
                 .setTrainingSet(dataset)
                 .setExpectedOutput(expected)
                 .setErrorFunction(errorFunction)
+                .build();*/
+        TrainMethod trainMethod = new BackPropagation.BackPropagationBuilder()
+                .setErrorFunction(errorFunction)
+                .setMaxEpochs(100)
+                .setMaxError(0.01)
+                .setMomentum(0.6)
+                .setLearningRate(0.4)
+                .setTrainingSet(dataset)
+                .setExpectedOutput(expected)
                 .build();
 
         NeuralNetwork nn = new NeuralNetwork.NeuralNetworkBuilder()
