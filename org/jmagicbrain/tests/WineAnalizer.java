@@ -93,13 +93,13 @@ public class WineAnalizer {
         WeightInitializer weightInitializer = new DefaultInitializer();
         TrainMethod trainMethod = new ParticleSwarmOptimization(
                 0.01,
-                0.0999,
-                0.2589,
-                0.2589,
-                20,
+                0.3999,
+                0.1589,
+                0.1589,
+                2000,
                 15.0,
                 -15.0,
-                700,
+                500,
                 0.1,
                 dataset,
                 expected,
