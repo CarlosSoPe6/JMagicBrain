@@ -84,6 +84,23 @@ public class Normalizers {
         return matrix;
     }
 
+    /**
+     * Normaliza una matriz de Integer tomando normalizando 0x00 a 0 y 0xFF a 1
+     * @param value La matriz rectangular a normalizar
+     * @return Matriz de doubles normalizada
+     */
+    public static double[][] normalizeWithDefaults(int[][] value){
+        double[][] matrix = new double[value.length][value[0].length];
+
+        for(int i = 0; i < value.length; i++){
+            for(int j = 0; j < value[i].length; j++){
+                matrix[i][j] = normalizeRange(value[i][j], Integer.MIN_VALUE, Integer.MAX_VALUE);
+            }
+        }
+
+        return matrix;
+    }
+
     public static double[] normalize(byte[] value){
         double[] data = new double[value.length];
         for(int j = 0; j < value.length; j++){
