@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53eb736b-48c5-46d4-b3de-c20f43321215" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/NeuralNetwork.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/NeuralNetwork.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/ImageAnalyzer.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/ImageAnalyzer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" afterPath="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,7 +19,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ParticleSwarmOptimization.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ParticleSwarmOptimization.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="143">
@@ -37,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BackPropagation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="BackPropagation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="84" column="9" lean-forward="false" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
+            <state relative-caret-position="160">
+              <caret line="168" column="47" lean-forward="false" selection-start-line="168" selection-start-column="47" selection-end-line="168" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -66,6 +60,7 @@
       <find>congitiveLocalConstantcongitiveLocalConstant</find>
       <find>System.o</find>
       <find>System.out</find>
+      <find>system.out</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -104,8 +99,8 @@
         <option value="$PROJECT_DIR$/org/jmagicbrain/tests/WineAnalizer.java" />
         <option value="$PROJECT_DIR$/org/jmagicbrain/tests/AgaricusLepiota.java" />
         <option value="$PROJECT_DIR$/org/jmagicbrain/tests/ImageAnalyzer.java" />
-        <option value="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" />
         <option value="$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java" />
+        <option value="$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java" />
       </list>
     </option>
   </component>
@@ -685,14 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="84" column="9" lean-forward="false" selection-start-line="84" selection-start-column="9" selection-end-line="84" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/ParticleSwarmOptimization.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="143">
@@ -700,6 +687,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/org/jmagicbrain/trainmethod/BackPropagation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="168" column="47" lean-forward="false" selection-start-line="168" selection-start-column="47" selection-end-line="168" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -94,41 +94,80 @@ public class BackPropagation extends TrainMethod{
         private double[][] expectedOutput;
         private ErrorFunction errorFunction;
 
+        /**
+         * Establece el learning rate del backpopagation
+         * @param learningRate El learning rate
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setLearningRate(double learningRate) {
             this.learningRate = learningRate;
             return this;
         }
 
+        /**
+         * Establece el 'momentum' delbackpopagation
+         * @param momentum El momentum
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setMomentum(double momentum) {
             this.momentum = momentum;
             return this;
         }
 
+        /**
+         * Establece las epocas máximas para el training set
+         * @param maxEpochs Máximo de epocas
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setMaxEpochs(int maxEpochs) {
             this.maxEpochs = maxEpochs;
             return this;
         }
 
+        /**
+         * Establece el error máximo, para la condición de salida
+         * @param maxError El error máximo
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setMaxError(double maxError) {
             this.maxError = maxError;
             return this;
         }
 
+        /**
+         * Establece el training set a evaluar
+         * @param trainingSet El training set
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setTrainingSet(double[][] trainingSet) {
             this.trainingSet = trainingSet;
             return this;
         }
 
+        /**
+         * Establece la salida esperada
+         * @param expectedOutput La salida esperada
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setExpectedOutput(double[][] expectedOutput) {
             this.expectedOutput = expectedOutput;
             return this;
         }
 
+        /**
+         * Establece la función de error
+         * @param errorFunction La función de error
+         * @return Referencia a si mismo
+         */
         public BackPropagationBuilder setErrorFunction(ErrorFunction errorFunction) {
             this.errorFunction = errorFunction;
             return this;
         }
 
+        /**
+         * Crea una instancia de BackPropagation
+         * @return Instancia de BackPropagation
+         */
         public BackPropagation build(){
             // TODO: Check params
 
