@@ -3,6 +3,7 @@ package org.jmagicbrain.trainmethod;
 import org.jmagicbrain.exceptions.InvalidTrainingMethodArguments;
 import org.jmagicbrain.functions.ErrorFunction;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class ParticleSwarmOptimization extends TrainMethod{
@@ -141,6 +142,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
                 System.arraycopy(position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
             }
         }
+
     }
 
     private class Particle {
