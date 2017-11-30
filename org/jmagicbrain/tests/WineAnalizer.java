@@ -29,8 +29,8 @@ public class WineAnalizer {
 
         int dslen = 178;
         Reader in = null;
-        List<List<Double>> dataset = new ArrayList<>(dslen);
-        List<List<Double>> expected = new ArrayList<>(dslen);
+        double[][] dataset = new double[dslen][13];
+        double[][] expected = new double[dslen][];
 
         try {
             in = new FileReader("C:\\Desarrollo\\hhh.csv");
@@ -60,51 +60,42 @@ public class WineAnalizer {
 
         for(int i = 0; i < dslen; i++){
             CSVRecord e = recordArrayList.get(i);
-            List<Double> entry = new ArrayList<>(NormalizationMax.length);
             for(int j = 0; j < 13; j++){
-                entry.add(j, Normalizers.normalizeRange(Double.parseDouble(e.get(j + 1)), NormalizationMin[j], NormalizationMax[j]));
+                dataset[i][j] = (Normalizers.normalizeRange(Double.parseDouble(e.get(j + 1)), NormalizationMin[j], NormalizationMax[j]));
                 //dataset[i][j] = Double.parseDouble(e.get(j));
             }
-            dataset.add(i, entry);
 
-            List<Double> expetedEntry = new ArrayList<>(3);
+
             switch (Integer.parseInt(e.get(0))){
                 case 1:
-                    expetedEntry.add(0, 1.0);
-                    expetedEntry.add(1, 0.0);
-                    expetedEntry.add(2, 0.0);
+                    expected[i] = new double[]{1.0, 0, 0};
                     break;
                 case 2:
-                    expetedEntry.add(0, 0.0);
-                    expetedEntry.add(1, 1.0);
-                    expetedEntry.add(2, 0.0);
+                    expected[i] = new double[]{0, 1.0, 0};
                     break;
                 case 3:
-                    expetedEntry.add(0, 0.0);
-                    expetedEntry.add(1, 0.0);
-                    expetedEntry.add(2, 1.0);
+                    expected[i] = new double[]{0, 0, 1.0};
                     break;
             }
-            expected.add(i, expetedEntry);
         }
 
         ActivationFunction activationFunction = new Sigmoid();
         ErrorFunction errorFunction = new MeanSquaredError();
         WeightInitializer weightInitializer = new DefaultInitializer();
-        TrainMethod trainMethod = new ParticleSwarmOptimization(
-                0.01,
-                0.3999,
-                0.1589,
-                0.1589,
-                2000,
-                15.0,
-                -15.0,
-                500,
-                0.1,
-                dataset,
-                expected,
-                errorFunction
-        );
+        TrainMethod trainMethod = new ParticleSwarmOptimization.ParticleSwarmOptimizationBuilder()
+                .setProbDeath(0.01)
+                .setW(0.3999)
+                .setCongitiveLocalConstant(0.1599)
+                .setSocialGlobalConstant(0.1599)
+                .setNumberOfParticles(2000)
+                .setMaxX(15)
+                .setMinX(-15)
+                .setMaxEpochs(500)
+                .setMaxError(0.09)
+                .setTrainingSet(dataset)
+                .setExpectedOutput(expected)
+                .setErrorFunction(errorFunction)
+                .build();
 
         NeuralNetwork nn = new NeuralNetwork.NeuralNetworkBuilder()
                 .setActivationFunction(activationFunction)
@@ -120,10 +111,10 @@ public class WineAnalizer {
         nn.train();
         System.out.println("Ending train");
 
-        double[] input = new double[dataset.get(0).size()];
+        double[] input = new double[dataset[0].length];
 
         for (int i = 0; i < input.length; i++){
-            input[i] = dataset.get(0).get(i);
+            input[i] = dataset[0][i];
         }
 
         nn.setInputLayer(input);

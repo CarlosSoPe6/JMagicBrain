@@ -50,6 +50,10 @@ public class NeuralNetwork {
         trainingMethod.setNeuralNetwork(this);
     }
 
+    /**
+     * Obtiene el número total de pesos
+     * @return total de pesos y umbrales
+     */
     public int getNumberOfWeights() {
         return numberOfWeights;
     }
@@ -62,6 +66,10 @@ public class NeuralNetwork {
         return weightsMatrix;
     }
 
+    /**
+     * Establece los pesos de la matriz
+     * @param weights arreglo de matrices de pesos
+     */
     public void setWeights(double[][][] weights){
         for(int i = 0; i < this.weightsMatrix.length; i++){
             for(int j = 0; j < this.weightsMatrix[i].length; j++){
@@ -70,6 +78,10 @@ public class NeuralNetwork {
         }
     }
 
+    /**
+     * Establece los pesos de la matriz
+     * @param weights vector de pesos
+     */
     public void setWeights(double[] weights){
         int l = 0;
         for (int i = 0; i < this.weightsMatrix.length; i++){
@@ -112,10 +124,18 @@ public class NeuralNetwork {
         return this.layers[layers.length - 1];
     }
 
+    /**
+     * Regresa las capas de la red neuronal
+     * @return las capas de la red neuronal
+     */
     public double[][] getLayers(){
         return this.layers;
     }
 
+    /**
+     * La función de activación de la instancia actual
+     * @return La función de activación
+     */
     public ActivationFunction getActivationFunction() {
         return activationFunction;
     }
@@ -214,7 +234,7 @@ public class NeuralNetwork {
         /**
          * Crea y retorna una referencia a un objeto
          * @return Referecia al objeto construido
-         * @throws InvalidNeuralNetworkArguments
+         * @throws InvalidNeuralNetworkArguments En caso de tener un argumento inválido
          */
         public NeuralNetwork build() throws InvalidNeuralNetworkArguments{
             Integer[] layers = new Integer[neuronList.size()];

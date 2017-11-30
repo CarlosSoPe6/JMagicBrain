@@ -14,7 +14,7 @@ public class BackPropagation extends TrainMethod{
     private final double learningRate;
     private final double momentum;
 
-    public BackPropagation(double learningRate, double momentum, int maxEpochs, double maxError, List<List<Double>> trainingSet, List<List<Double>> expectedOutput, ErrorFunction errorFunction) {
+    public BackPropagation(double learningRate, double momentum, int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction) {
         super(maxEpochs, maxError, trainingSet, expectedOutput, errorFunction);
         this.momentum = momentum;
         this.learningRate = learningRate;
@@ -30,15 +30,15 @@ public class BackPropagation extends TrainMethod{
         int epocs = 0;
         int hits = 0;
         double[][] layers = neuralNetwork.getLayers();
-        double[] expected = new double[expectedOutput.size()];
+        double[] expected = new double[expectedOutput.length];
         int ite = 0;
-        for(List<Double> l: expectedOutput) {
+        for(double[] l: expectedOutput) {
             for (double d : l) {
                 expected[ite] = d;
             }
         }
 
-        while (epocs < maxEpochs && hits < super.trainingSet.size()) {
+        while (epocs < maxEpochs && hits < super.trainingSet.length) {
             //Probaly doesnt works
             errorFunction.getError(super.trainingSet, super.expectedOutput);
             double sigma = 0;
@@ -77,7 +77,6 @@ public class BackPropagation extends TrainMethod{
 
     private void sigmasInit() {
         this.sigmas = new double[neuralNetwork.getLayers().length - 1][];
-
     }
 }
  

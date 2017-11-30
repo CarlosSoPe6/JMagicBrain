@@ -29,5 +29,5 @@ public abstract class ErrorFunction {
      * @param objective El resultado esperadao para cada caso
      * @return El error
      */
-    public abstract double getError(List<List<Double>> trainingSet, List<List<Double>> objective);
+    public abstract double getError(double[][] trainingSet, double[][] objective);
 }

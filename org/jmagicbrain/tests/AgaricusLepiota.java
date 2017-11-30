@@ -69,24 +69,25 @@ public class AgaricusLepiota {
         ActivationFunction activationFunction = new Sigmoid();
         ErrorFunction errorFunction = new MeanSquaredError();
         WeightInitializer weightInitializer = new DefaultInitializer();
-        /*TrainMethod trainMethod = new ParticleSwarmOptimization(
-                0.009,
-                0.058,
-                0.074,
-                12,
-                10.0,
-                -10.0,
-                700,
-                0.1,
-                ds,
-                expected,
-                errorFunction
-        );*/
+        TrainMethod trainMethod = new ParticleSwarmOptimization.ParticleSwarmOptimizationBuilder()
+                .setProbDeath(0.01)
+                .setW(0.3999)
+                .setCongitiveLocalConstant(0.1599)
+                .setSocialGlobalConstant(0.1599)
+                .setNumberOfParticles(500)
+                .setMaxX(15)
+                .setMinX(-15)
+                .setMaxEpochs(1000)
+                .setMaxError(0.09)
+                .setTrainingSet(ds)
+                .setExpectedOutput(expected)
+                .setErrorFunction(errorFunction)
+                .build();
 
         NeuralNetwork nn = new NeuralNetwork.NeuralNetworkBuilder()
                 .setActivationFunction(activationFunction)
                 .setErrorFunction(errorFunction)
-                //.setTrainingMethod(trainMethod)
+                .setTrainingMethod(trainMethod)
                 .setWeightInitializer(weightInitializer)
                 .addLayer(22)
                 .addLayer(10)

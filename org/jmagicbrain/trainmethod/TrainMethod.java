@@ -9,15 +9,15 @@ public abstract class TrainMethod
 {
 	
 	protected NeuralNetwork neuralNetwork;
-	protected List<List<Double>> trainingSet;
-	protected List<List<Double>> expectedOutput;
+	protected double[][] trainingSet;
+	protected double[][] expectedOutput;
 	
 	protected ErrorFunction errorFunction;
 
 	protected final int maxEpochs;
 	protected final double maxError;
 	
-	public TrainMethod(int maxEpochs, double maxError, List<List<Double>> trainingSet, List<List<Double>> expectedOutput, ErrorFunction errorFunction){
+	public TrainMethod(int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction){
 		this.setExpectedOutput(expectedOutput);
 		this.setTrainingSet(trainingSet);
 		this.errorFunction = errorFunction;
@@ -25,21 +25,21 @@ public abstract class TrainMethod
 		this.maxError = maxError;
 	}
 	
-	public void setTrainingSet(List<List<Double>> trainingSet){
+	public void setTrainingSet(double[][] trainingSet){
 		
 		this.trainingSet = trainingSet;
 	}
 	
-	public void setExpectedOutput(List<List<Double>> expectedOutput){
+	public void setExpectedOutput(double[][] expectedOutput){
 		
 		this.expectedOutput = expectedOutput;
 	}
 	
-	public List<List<Double>> getTrainingSet(){
+	public double[][] getTrainingSet(){
 		return this.trainingSet;
 	}
 
-	public List<List<Double>> getExpectedOutput(){
+	public double[][] getExpectedOutput(){
 		return this.expectedOutput;
 	}
 	

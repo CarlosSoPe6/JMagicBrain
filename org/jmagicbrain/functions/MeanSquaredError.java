@@ -8,28 +8,18 @@ import java.util.List;
 public class MeanSquaredError extends ErrorFunction {
 
     @Override
-    public double getError(List<List<Double>> trainingSet, List<List<Double>> objective) {
+    public double getError(double[][] trainingSet, double[][] objective) {
         double sumSquaredError = 0.0;
         double[] output;
-        double[] xValues = new double[trainingSet.get(0).size()];
-        double[] tValues = new double[objective.get(0).size()];
-        for(int i = 0; i < trainingSet.size(); i++){
+        for(int i = 0; i < trainingSet.length; i++){
 
-            for(int j = 0; j < trainingSet.get(i).size(); j++){
-                xValues[j] = trainingSet.get(i).get(j);
-            }
-
-            neuralNetwork.setInputLayer(xValues);
+            neuralNetwork.setInputLayer(trainingSet[i]);
             neuralNetwork.think();
             output = neuralNetwork.getOutputLayer();
-            for(int j = 0; j < objective.get(i).size(); j++){
-                tValues[j] = objective.get(i).get(j);
-            }
-            for(int j = 0; j < objective.get(i).size(); j++){
-                sumSquaredError += ((output[j] - tValues[j]) * (output[j] - tValues[j]));
+            for(int j = 0; j < objective[i].length; j++){
+                sumSquaredError += ((output[j] - objective[i][j]) * (output[j] - objective[i][j]));
             }
         }
-
-        return sumSquaredError / trainingSet.size();
+        return sumSquaredError / trainingSet.length;
     }
 }

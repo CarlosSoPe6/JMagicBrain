@@ -1,9 +1,8 @@
 package org.jmagicbrain.trainmethod;
 
+import org.jmagicbrain.exceptions.InvalidTrainingMethodArguments;
 import org.jmagicbrain.functions.ErrorFunction;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class ParticleSwarmOptimization extends TrainMethod{
@@ -23,7 +22,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
     private final double socialGlobalConstant;
     private final double probDeath;
 
-    public ParticleSwarmOptimization(double probDeath, double w, double congitiveLocalConstant, double socialGlobalConstant, int numberOfParticles, double maxX, double minX, int maxEpochs, double maxError, List<List<Double>> trainingSet, List<List<Double>> expectedOutput, ErrorFunction errorFunction) {
+    private ParticleSwarmOptimization(double probDeath, double w, double congitiveLocalConstant, double socialGlobalConstant, int numberOfParticles, double maxX, double minX, int maxEpochs, double maxError, double[][] trainingSet, double[][] expectedOutput, ErrorFunction errorFunction) {
         super(maxEpochs, maxError, trainingSet, expectedOutput, errorFunction);
         this.numberOfParticles = numberOfParticles;
         this.maxX = maxX;
@@ -38,6 +37,10 @@ public class ParticleSwarmOptimization extends TrainMethod{
         this.random = new Random();
     }
 
+    /**
+     * Da un orden aleatoreo a un arreglo
+     * @param order arreglo a revolver
+     */
     private void shuffle(int[] order){
         for (int i = 0; i < order.length; i++){
             int tmp = order[i];
@@ -114,12 +117,11 @@ public class ParticleSwarmOptimization extends TrainMethod{
             }
             epoch++;
         }
-
-        System.out.println(Arrays.toString(bestGlobalPosition));
-        System.out.printf("Best error: %f\n", bestGlobalError);
-        printDistances();
     }
 
+    /**
+     * Inicializa las partículas
+     */
     private void initParticles(){
         double hi = 0.095 * maxX;
         double lo = 0.095 * minX;
@@ -137,112 +139,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
             if(error < bestGlobalError){
                 bestGlobalError = error;
                 System.arraycopy(position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
-                System.out.println(Arrays.toString(bestGlobalPosition));
             }
-        }
-
-
-        swarm[0].position = new double[] {
-                    -3.0844564959493583,
-                    -1.2967465354470171,
-                    -3.4568230867127125,
-                    2.427439016134647,
-                    -0.20166162078097105,
-                    -0.4290972662466771,
-                    -0.4697318183992755,
-                    0.6120798051855239,
-                    -1.2037172045033857,
-                    -2.6851589882808415,
-                    2.511666622784259,
-                    -2.166286047950086,
-                    -3.218021289916955,
-                    2.7437658341517515,
-                    -5.936634301991448,
-                    -2.5146529219198013,
-                    -6.666062815913475,
-                    2.668143796200943,
-                    -1.148340328571109,
-                    -0.3666399913890762,
-                    0.061704049785499704,
-                    1.7943803457634186,
-                    -1.1354221107143903,
-                    -6.720335520866052,
-                    6.475759097030569,
-                    -1.093673628747236,
-                    -5.908701589833334,
-                    4.646373751207232,
-                    1.8761012387864753,
-                    0.6907004154874573,
-                    2.028270979396172,
-                    -2.302496472525233,
-                    -0.42202901840671436,
-                    -0.20374994356740514,
-                    1.0815174678404853,
-                    -1.3649705635082576,
-                    0.6111084428476541,
-                    1.2242951174694339,
-                    -2.6361997551615364,
-                    1.4976621273579531,
-                    3.515643547084648,
-                    -3.2995779551140916,
-                    1.0038961361132481,
-                    0.3267767713778661,
-                    1.0410957890092047,
-                    -1.879280383352821,
-                    -0.5130589321833102,
-                    0.565484633783712,
-                    1.2702766548623183,
-                    -0.7707257886857778,
-                    0.5612085472740267,
-                    0.24176654837651126,
-                    -0.854833276051476,
-                    1.7138438689264544,
-                    2.18359059945286,
-                    -2.0666449511989984,
-                    -7.917746367092543,
-                    -9.258325648114015,
-                    7.67840062368662,
-                    6.987379267150389,
-                    -7.159177173676007,
-                    -4.298621009310246,
-                    14.430268876230658,
-                    -11.35862286210741,
-                    8.825803282410579,
-                    -2.3367301440658004,
-                    1.8959206322885984,
-                    -13.391921171829358,
-                    3.0972128133949615,
-                    -13.079045310684466,
-                    5.02949611890173
-        };
-
-        neuralNetwork.setWeights(swarm[0].position);
-        error = super.errorFunction.getError(trainingSet, expectedOutput);
-        if(error < bestGlobalError){
-            bestGlobalError = error;
-            System.arraycopy(swarm[0].position, 0, bestGlobalPosition, 0, bestGlobalPosition.length);
-            System.out.println(Arrays.toString(bestGlobalPosition));
-        }
-
-        System.out.println(bestGlobalError);
-        System.out.println(error);
-
-        swarm[0].error = error;
-        swarm[0].bestError = error;
-        swarm[0].bestPosition = swarm[0].position.clone();
-
-
-    }
-
-    private void printDistances(){
-        double sum;
-        for(int i = 0; i < swarm.length; i++){
-            sum = 0;
-            for(int j = 0; j < bestGlobalPosition.length; j++){
-                sum += (bestGlobalPosition[j] - swarm[i].position[j]) * (bestGlobalPosition[j] - swarm[i].position[j]);
-            }
-            sum = Math.sqrt(sum);
-            System.out.printf("Particle: %d, %f\n", i+1, sum);
         }
     }
 
@@ -260,6 +157,171 @@ public class ParticleSwarmOptimization extends TrainMethod{
 
             this.error = error;
             this.bestError = bestError;
+        }
+    }
+
+    /**
+     * Constructor para 'ParticleSwarmOptimization'
+     */
+    public static class ParticleSwarmOptimizationBuilder {
+        private double probDeath;
+        private double w;
+        private double congitiveLocalConstant;
+        private double socialGlobalConstant;
+        private int numberOfParticles;
+        private double maxX;
+        private double minX;
+        private int maxEpochs;
+        private double maxError;
+        private double[][] trainingSet;
+        private double[][] expectedOutput;
+        private ErrorFunction errorFunction;
+
+        /**
+         * Establece la probabilidad de muerte de una partícula
+         * @param probDeath La probablilidad de merte
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setProbDeath(double probDeath) {
+            this.probDeath = probDeath;
+            return this;
+        }
+
+        /**
+         * Establece la importancia que se le drá a la velocidad anterior
+         * @param w El valor de la constane
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setW(double w) {
+            this.w = w;
+            return this;
+        }
+
+        /**
+         * Establece el valor de la constante 'cognitive local', la cual le da la importancia a el mejor valor del
+         * enjambre  al momento de moverse
+         * @param congitiveLocalConstant El valor de la constante
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setCongitiveLocalConstant(double congitiveLocalConstant) {
+            this.congitiveLocalConstant = congitiveLocalConstant;
+            return this;
+        }
+
+        /**
+         * Establece el valor de la constante 'social global', la cual le da la importancia a el mejor valor del
+         * enjambre al momento de moverse
+         * @param socialGlobalConstant El valor de la constante
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setSocialGlobalConstant(double socialGlobalConstant) {
+            this.socialGlobalConstant = socialGlobalConstant;
+            return this;
+        }
+
+        /**
+         * Establece el númoero de partículas
+         * @param numberOfParticles El número de particulas
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setNumberOfParticles(int numberOfParticles) {
+            this.numberOfParticles = numberOfParticles;
+            return this;
+        }
+
+        /**
+         * Establece el valo máximo de los pesos
+         * @param maxX El valor máximo de los pesos
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setMaxX(double maxX) {
+            this.maxX = maxX;
+            return this;
+        }
+
+        /**
+         * Establece el valor mínimo de los pesos
+         * @param minX El valor mínimo de los pesos
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setMinX(double minX) {
+            this.minX = minX;
+            return this;
+        }
+
+        /**
+         * Establece las epocas máximas
+         * @param maxEpochs Las epocas máximas
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setMaxEpochs(int maxEpochs) {
+            this.maxEpochs = maxEpochs;
+            return this;
+        }
+
+        /**
+         * Establece el error para la condición de paro
+         * @param maxError Error esperado
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setMaxError(double maxError) {
+            this.maxError = maxError;
+            return this;
+        }
+
+        /**
+         * Establece los datos de entrenamiento
+         * @param trainingSet Lista de los datos de entrenamiento
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setTrainingSet(double[][] trainingSet) {
+            this.trainingSet = trainingSet;
+            return this;
+        }
+
+        /**
+         * Establece los datos esperados
+         * @param expectedOutput Lista de los datos esperados
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setExpectedOutput(double[][] expectedOutput) {
+            this.expectedOutput = expectedOutput;
+            return this;
+        }
+
+        /**
+         * Establece la función de error
+         * @param errorFunction Instancia de ErrorFunction
+         * @return Referencia a si mismo
+         */
+        public ParticleSwarmOptimizationBuilder setErrorFunction(ErrorFunction errorFunction) {
+            this.errorFunction = errorFunction;
+            return this;
+        }
+
+        /**
+         * Crea una instancia de ParticleSwarmOptimization con los parámetros dados
+         * @return Instacia de ParticleSwarmOptimization
+         * @throws InvalidTrainingMethodArguments En caso de tener algún argumento inválido
+         */
+        public ParticleSwarmOptimization build() throws InvalidTrainingMethodArguments{
+
+            // TODO: Check nulls
+
+            return new ParticleSwarmOptimization(
+                probDeath,
+                w,
+                congitiveLocalConstant,
+                socialGlobalConstant,
+                numberOfParticles,
+                maxX,
+                minX,
+                maxEpochs,
+                maxError,
+                trainingSet,
+                expectedOutput,
+                errorFunction
+            );
         }
     }
 }
