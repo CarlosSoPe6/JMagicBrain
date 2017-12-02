@@ -43,4 +43,18 @@ public class Readers {
         return data;
     }
 
+    public static int[] getBufferedImage(File f) throws IOException {
+        BufferedImage img = ImageIO.read(f);
+        int[] data = new int[img.getHeight() * img.getWidth()];
+        int count = 0;
+        for(int x = 0; x < img.getHeight(); x++) {
+            for (int y = 0; y < img.getWidth(); y++) {
+                data[count] = img.getRGB(x, y);
+                count++;
+            }
+        }
+
+        return data;
+    }
+
 }

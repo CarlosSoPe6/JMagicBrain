@@ -20,6 +20,15 @@ public class NeuralNetwork {
     private double[][][] weightsMatrix;
 
     private int numberOfWeights;
+
+    public ErrorFunction getErrorFunction() {
+        return errorFunction;
+    }
+
+    public void setErrorFunction(ErrorFunction errorFunction) {
+        this.errorFunction = errorFunction;
+    }
+
     private ErrorFunction errorFunction;
     private ActivationFunction activationFunction;
     private TrainMethod trainingMethod;
@@ -157,8 +166,8 @@ public class NeuralNetwork {
     /**
      * Entrena la red neuronal
      */
-    public void train(){
-        trainingMethod.train();
+    public double train(){
+        return trainingMethod.train();
     }
 
     /**

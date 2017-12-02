@@ -31,7 +31,7 @@ public class BackPropagation extends TrainMethod{
     }
 
     @Override
-    public void train() {
+    public double train() {
         double error = 0;
         int currentEpoch = 0;
         double delta = 0;
@@ -83,6 +83,8 @@ public class BackPropagation extends TrainMethod{
             }
             currentEpoch++;
         }
+
+        return errorFunction.getError(trainingSet, expectedOutput);
     }
 
     public static class BackPropagationBuilder{

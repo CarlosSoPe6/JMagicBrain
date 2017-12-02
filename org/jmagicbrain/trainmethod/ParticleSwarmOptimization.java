@@ -51,7 +51,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
     }
 
     @Override
-    public void train() {
+    public double train() {
         bestGlobalPosition = new double[neuralNetwork.getNumberOfWeights()];
         initParticles();
         int epoch = 0;
@@ -118,6 +118,8 @@ public class ParticleSwarmOptimization extends TrainMethod{
             }
             epoch++;
         }
+
+        return bestGlobalError;
     }
 
     /**

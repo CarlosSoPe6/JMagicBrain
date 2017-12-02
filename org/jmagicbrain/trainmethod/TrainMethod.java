@@ -47,6 +47,6 @@ public abstract class TrainMethod
 		this.neuralNetwork = neuralNetwork;
 	}
 	
-	public abstract void train();
+	public abstract double train();
 
 }

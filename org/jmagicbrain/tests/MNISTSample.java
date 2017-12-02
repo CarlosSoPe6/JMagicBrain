@@ -8,7 +8,6 @@ import org.jmagicbrain.functions.Sigmoid;
 import org.jmagicbrain.initializers.DefaultInitializer;
 import org.jmagicbrain.initializers.WeightInitializer;
 import org.jmagicbrain.trainmethod.BackPropagation;
-import org.jmagicbrain.trainmethod.ParticleSwarmOptimization;
 import org.jmagicbrain.trainmethod.TrainMethod;
 import org.jmagicbrain.utils.Normalizers;
 import org.jmagicbrain.utils.Readers;
@@ -17,7 +16,6 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -25,26 +23,123 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MNISTSample extends JFrame {
+
+    private JLabel asnwerlabel;
+    private JButton imageButton;
+    private JLabel jLabel1;
     private JPanel rootPanel;
-    private JButton loadNewImageButton;
     private JPanel imagePanel;
-    private JLabel predictedName;
 
     private double[][] images;
     private double[][] expected;
 
-    private final ActivationFunction activationFunction;
-    private final ErrorFunction errorFunction;
-    private final WeightInitializer weightInitializer;
-    private final TrainMethod trainMethod;
-    private final NeuralNetwork neuralNetwork;
+    private ActivationFunction activationFunction;
+    private ErrorFunction errorFunction;
+    private WeightInitializer weightInitializer;
+    private TrainMethod trainMethod;
+    private NeuralNetwork neuralNetwork;
 
     public MNISTSample() throws IOException {
-        super("MNIST");
-        super.setContentPane(rootPanel);
-        super.pack();
-        super.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        super("MNIST Sample");
 
+        initUI();
+
+        initNeuralNet();
+
+        super.setVisible(true);
+    }
+
+    private void initUI(){
+        rootPanel = new JPanel();
+        imageButton = new JButton();
+        jLabel1 = new JLabel();
+        asnwerlabel = new JLabel();
+        imagePanel = new  JPanel();
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setMinimumSize(new java.awt.Dimension(254, 254));
+        setName("rootFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(254, 254));
+        setResizable(false);
+        setSize(new java.awt.Dimension(254, 254));
+
+        rootPanel.setBackground(new java.awt.Color(255, 255, 255));
+        rootPanel.setPreferredSize(new java.awt.Dimension(254, 254));
+
+        imageButton.setBackground(new java.awt.Color(255, 255, 255));
+        imageButton.setText("New image");
+        imageButton.addActionListener(this::imageButtonActionPerformed);
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("La imagen es");
+        jLabel1.setToolTipText("");
+
+        asnwerlabel.setBackground(new java.awt.Color(255, 255, 255));
+        asnwerlabel.setForeground(new java.awt.Color(0, 0, 0));
+        asnwerlabel.setText("X");
+
+        imagePanel.setPreferredSize(new java.awt.Dimension(28, 28));
+
+        GroupLayout jPanel2Layout = new GroupLayout(imagePanel);
+        imagePanel.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 192, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 192, Short.MAX_VALUE)
+        );
+
+        GroupLayout jPanel1Layout = new GroupLayout(rootPanel);
+        rootPanel.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addContainerGap()
+                                                .addComponent(imagePanel, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                                        .addGroup(GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(imageButton)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel1)))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(asnwerlabel, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(imageButton)
+                                        .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(asnwerlabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addContainerGap())))
+        );
+
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(rootPanel, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(rootPanel, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+        );
+
+        pack();
+    }
+
+    private void initNeuralNet() throws IOException {
         ArrayList<File> files = new ArrayList<>();
         getFiles("C:\\Desarrollo\\DataSets\\Numeros\\Train", files);
         images = new double[files.size()][784];
@@ -106,14 +201,9 @@ public class MNISTSample extends JFrame {
         System.out.println("Starting train");
         System.out.println(neuralNetwork.train());
         System.out.println("Ending train");
-
-
-
-        super.setVisible(true);
-        loadNewImageButton.addActionListener(this::onLoadNewImageActionPerformed);
     }
 
-    private void onLoadNewImageActionPerformed(ActionEvent e) {
+    private void imageButtonActionPerformed(ActionEvent e) {
         FileDialog fd = new FileDialog(this, "Choose a file", FileDialog.LOAD);
         fd.setDirectory("C:\\");
         fd.setVisible(true);
@@ -143,6 +233,8 @@ public class MNISTSample extends JFrame {
                 }
             }
 
+            asnwerlabel.setText(maxIndex + "");
+
         } catch (IOException e1) {
             e1.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error de lectura");
@@ -157,7 +249,7 @@ public class MNISTSample extends JFrame {
 
         int i = 0;
         for(File f : fileList){
-            if(f.isFile() && i < 70){
+            if(f.isFile() && i < 100){
                 files.add(f);
                 i++;
             }else if(f.isDirectory()){
