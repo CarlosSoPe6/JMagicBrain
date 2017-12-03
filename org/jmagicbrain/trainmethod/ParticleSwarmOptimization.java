@@ -51,7 +51,7 @@ public class ParticleSwarmOptimization extends TrainMethod{
     }
 
     @Override
-    public void train() {
+    public double train() {
         bestGlobalPosition = new double[neuralNetwork.getNumberOfWeights()];
         initParticles();
         int epoch = 0;
@@ -118,6 +118,8 @@ public class ParticleSwarmOptimization extends TrainMethod{
             }
             epoch++;
         }
+
+        return bestGlobalError;
     }
 
     /**
@@ -166,15 +168,15 @@ public class ParticleSwarmOptimization extends TrainMethod{
      * Constructor para 'ParticleSwarmOptimization'
      */
     public static class ParticleSwarmOptimizationBuilder {
-        private double probDeath;
-        private double w;
-        private double congitiveLocalConstant;
-        private double socialGlobalConstant;
-        private int numberOfParticles;
-        private double maxX;
-        private double minX;
-        private int maxEpochs;
-        private double maxError;
+        private Double probDeath;
+        private Double w;
+        private Double congitiveLocalConstant;
+        private Double socialGlobalConstant;
+        private Integer numberOfParticles;
+        private Double maxX;
+        private Double minX;
+        private Integer maxEpochs;
+        private Double maxError;
         private double[][] trainingSet;
         private double[][] expectedOutput;
         private ErrorFunction errorFunction;
@@ -308,7 +310,31 @@ public class ParticleSwarmOptimization extends TrainMethod{
          */
         public ParticleSwarmOptimization build() throws InvalidTrainingMethodArguments{
 
-            // TODO: Check nulls
+            if(probDeath == null){
+                throw new InvalidTrainingMethodArguments("Probability of death is not set");
+            }else if(w == null){
+                throw new InvalidTrainingMethodArguments("Weight of velocity is not set");
+            }else if(congitiveLocalConstant == null){
+                throw new InvalidTrainingMethodArguments("Cognitive local constant is not set");
+            }else if(socialGlobalConstant == null){
+                throw new InvalidTrainingMethodArguments("Social global constant is not set");
+            }else if(maxX == null){
+                throw new InvalidTrainingMethodArguments("Max X at plane value is not set");
+            }else if(minX == null){
+                throw new InvalidTrainingMethodArguments("Min X at plane value is not set");
+            }else if(numberOfParticles == null){
+                throw new InvalidTrainingMethodArguments("Number of particles is not set");
+            }else if(maxEpochs == null){
+                throw new InvalidTrainingMethodArguments("Max epochs is not set");
+            }else if(maxError == null){
+                throw new InvalidTrainingMethodArguments("Max error is not set");
+            }else if(trainingSet == null){
+                throw new InvalidTrainingMethodArguments("TRaining set is not set");
+            }else if(expectedOutput == null){
+                throw new InvalidTrainingMethodArguments("Expected output is not set");
+            }else if(errorFunction == null){
+                throw new InvalidTrainingMethodArguments("Error function is not set");
+            }
 
             return new ParticleSwarmOptimization(
                 probDeath,

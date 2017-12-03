@@ -20,6 +20,15 @@ public class NeuralNetwork {
     private double[][][] weightsMatrix;
 
     private int numberOfWeights;
+
+    public ErrorFunction getErrorFunction() {
+        return errorFunction;
+    }
+
+    public void setErrorFunction(ErrorFunction errorFunction) {
+        this.errorFunction = errorFunction;
+    }
+
     private ErrorFunction errorFunction;
     private ActivationFunction activationFunction;
     private TrainMethod trainingMethod;
@@ -157,8 +166,8 @@ public class NeuralNetwork {
     /**
      * Entrena la red neuronal
      */
-    public void train(){
-        trainingMethod.train();
+    public double train(){
+        return trainingMethod.train();
     }
 
     /**
@@ -235,6 +244,13 @@ public class NeuralNetwork {
         public NeuralNetwork build() throws InvalidNeuralNetworkArguments{
             Integer[] layers = new Integer[neuronList.size()];
             neuronList.toArray(layers);
+
+            for (Integer layer : layers) {
+                if (layer < 1) {
+                    throw new InvalidNeuralNetworkArguments("A layer contains  neurons");
+                }
+            }
+
             if(layers.length == 0){
                 throw new InvalidNeuralNetworkArguments("There are no layers");
             }

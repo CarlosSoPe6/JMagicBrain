@@ -114,7 +114,7 @@ public class WineAnalizer {
                 .build();
 
         System.out.println("Starting train");
-        nn.train();
+        System.out.println(nn.train());
         System.out.println("Ending train");
 
         double[] input = new double[dataset[0].length];
