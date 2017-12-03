@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,11 +25,11 @@ import java.util.Arrays;
 
 public class MNISTSample extends JFrame {
 
-    private JLabel asnwerlabel;
+    private JLabel asnwerLabel;
     private JButton imageButton;
     private JLabel jLabel1;
     private JPanel rootPanel;
-    private JPanel imagePanel;
+    private JLabel imagePanel;
 
     private double[][] images;
     private double[][] expected;
@@ -53,45 +54,40 @@ public class MNISTSample extends JFrame {
         rootPanel = new JPanel();
         imageButton = new JButton();
         jLabel1 = new JLabel();
-        asnwerlabel = new JLabel();
-        imagePanel = new  JPanel();
+        asnwerLabel = new JLabel();
+        imagePanel = new JLabel();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(254, 254));
+        setBackground(new Color(255, 255, 255));
+        setMinimumSize(new Dimension(254, 254));
         setName("rootFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(254, 254));
+        setPreferredSize(new Dimension(254, 254));
         setResizable(false);
-        setSize(new java.awt.Dimension(254, 254));
+        setSize(new Dimension(254, 254));
 
-        rootPanel.setBackground(new java.awt.Color(255, 255, 255));
-        rootPanel.setPreferredSize(new java.awt.Dimension(254, 254));
+        rootPanel.setBackground(new Color(255, 255, 255));
+        rootPanel.setPreferredSize(new Dimension(254, 254));
 
-        imageButton.setBackground(new java.awt.Color(255, 255, 255));
+        imageButton.setBackground(new Color(255, 255, 255));
         imageButton.setText("New image");
-        imageButton.addActionListener(this::imageButtonActionPerformed);
+        imageButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                imageButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBackground(new Color(255, 255, 255));
+        jLabel1.setForeground(new Color(0, 0, 0));
         jLabel1.setText("La imagen es");
         jLabel1.setToolTipText("");
 
-        asnwerlabel.setBackground(new java.awt.Color(255, 255, 255));
-        asnwerlabel.setForeground(new java.awt.Color(0, 0, 0));
-        asnwerlabel.setText("X");
+        asnwerLabel.setBackground(new Color(255, 255, 255));
+        asnwerLabel.setForeground(new Color(0, 0, 0));
+        asnwerLabel.setText("X");
 
-        imagePanel.setPreferredSize(new java.awt.Dimension(28, 28));
-
-        GroupLayout jPanel2Layout = new GroupLayout(imagePanel);
-        imagePanel.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 192, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-                jPanel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGap(0, 192, Short.MAX_VALUE)
-        );
+        imagePanel.setMaximumSize(new Dimension(64, 64));
+        imagePanel.setMinimumSize(new Dimension(64, 64));
+        imagePanel.setPreferredSize(new Dimension(64, 64));
 
         GroupLayout jPanel1Layout = new GroupLayout(rootPanel);
         rootPanel.setLayout(jPanel1Layout);
@@ -101,27 +97,27 @@ public class MNISTSample extends JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addContainerGap()
-                                                .addComponent(imagePanel, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                                                .addComponent(imagePanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                         .addGroup(GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                                 .addComponent(imageButton)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jLabel1)))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(asnwerlabel, GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                                .addGap(35, 35, 35)
+                                .addComponent(asnwerLabel, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                                .addComponent(imagePanel, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                         .addComponent(imageButton)
                                         .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                        .addComponent(asnwerlabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                        .addComponent(asnwerLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                                 .addContainerGap())))
         );
 
@@ -162,24 +158,9 @@ public class MNISTSample extends JFrame {
         errorFunction = new MeanSquaredError();
         weightInitializer = new DefaultInitializer();
 
-        /*trainMethod = new ParticleSwarmOptimization.ParticleSwarmOptimizationBuilder()
-                .setProbDeath(0.09)
-                .setW(0.10936)
-                .setCongitiveLocalConstant(0.09301)
-                .setSocialGlobalConstant(0.09301)
-                .setNumberOfParticles(10000)
-                .setMaxX(60.0)
-                .setMinX(-60.0)
-                .setMaxEpochs(1000)
-                .setMaxError(0.1)
-                .setTrainingSet(images)
-                .setExpectedOutput(expected)
-                .setErrorFunction(errorFunction)
-                .build();*/
-
         trainMethod = new BackPropagation.BackPropagationBuilder()
                 .setErrorFunction(errorFunction)
-                .setMaxEpochs(20000)
+                .setMaxEpochs(1000)
                 .setMaxError(0.09)
                 .setMomentum(0.099099)
                 .setLearningRate(0.031099)
@@ -193,7 +174,6 @@ public class MNISTSample extends JFrame {
                 .setTrainingMethod(trainMethod)
                 .setWeightInitializer(weightInitializer)
                 .addLayer(784)
-                //.addLayer(16)
                 .addLayer(16)
                 .addLayer(10)
                 .build();
@@ -216,7 +196,7 @@ public class MNISTSample extends JFrame {
         try {
             image = Readers.getBufferedImage(file);
             BufferedImage bufferedImage = ImageIO.read(file);
-            imagePanel.paint(bufferedImage.getGraphics());
+            imagePanel.setIcon(new ImageIcon(bufferedImage));
             inputData = new double[image.length];
             for(int j = 0; j < image.length; j++){
                 inputData[j] = Normalizers.normalizeRange((((image[j] >> 16) & 0xFF) * 0.3) + (((image[j] >> 8) & 0xFF) *0.59) + ((image[j] & 0xFF) * 0.11 ), 0.0, 255.0);
@@ -233,7 +213,7 @@ public class MNISTSample extends JFrame {
                 }
             }
 
-            asnwerlabel.setText(maxIndex + "");
+            asnwerLabel.setText(maxIndex + "");
 
         } catch (IOException e1) {
             e1.printStackTrace();
