@@ -110,15 +110,6 @@ public class JSONTest {
         nn.think();
         System.out.println(Arrays.toString(nn.getOutputLayer()));
 
-        double[][][] d = nn.getWeights();
-        for (int i = 0; i < d.length; i++) {
-            for(int j = 0; j < d[i].length; j++) {
-                for (int k = 0; k < d[i][j].length; k++) {
-                    System.out.print(d[i][j][k] + ", ");
-                }
-                System.out.print("\n");
-            }
-            System.out.print("\n\n");
-        }
+        System.out.println(nn);
     }
 }

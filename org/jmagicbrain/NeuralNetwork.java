@@ -269,4 +269,28 @@ public class NeuralNetwork {
             return new NeuralNetwork(initializer, errorFunction, activationFunction, trainingMethod, layers);
         }
     }
+
+    /**
+     * @return String con los pesos y umbrales de la red neuronal
+     */
+    @Override
+    public String toString() {
+        String out = "Pesos:\n";
+        for(int i = 0; i < weightsMatrix[0].length; i++) {
+            out += "[";
+            for(int j = 0; j < weightsMatrix[0][i].length; j++) {
+                out += weightsMatrix[0][i][j];
+                if(j != weightsMatrix[0][i].length - 1) out += ", ";
+            }
+            out += "]\n";
+        }
+
+        out += "\nUmbrales:\n[";
+        for(int i = 0; i < weightsMatrix[1][0].length; i++) {
+            out += weightsMatrix[1][0][i];
+            if(i != weightsMatrix[1][0].length - 1) out += ", ";
+        }
+        out += "]";
+        return out;
+    }
 }
