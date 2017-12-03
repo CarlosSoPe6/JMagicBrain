@@ -76,7 +76,7 @@ public class NeuralNetwork {
     public void setWeights(double[][][] weights){
         for(int i = 0; i < this.weightsMatrix.length; i++){
             for(int j = 0; j < this.weightsMatrix[i].length; j++){
-                System.arraycopy(weightsMatrix[i][j], 0, this.weightsMatrix[i][j], 0, this.weightsMatrix[i][j].length);
+                System.arraycopy(weights[i][j], 0, this.weightsMatrix[i][j], 0, this.weightsMatrix[i][j].length);
             }
         }
     }
