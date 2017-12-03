@@ -244,6 +244,13 @@ public class NeuralNetwork {
         public NeuralNetwork build() throws InvalidNeuralNetworkArguments{
             Integer[] layers = new Integer[neuronList.size()];
             neuronList.toArray(layers);
+
+            for (Integer layer : layers) {
+                if (layer < 1) {
+                    throw new InvalidNeuralNetworkArguments("A layer contains  neurons");
+                }
+            }
+
             if(layers.length == 0){
                 throw new InvalidNeuralNetworkArguments("There are no layers");
             }

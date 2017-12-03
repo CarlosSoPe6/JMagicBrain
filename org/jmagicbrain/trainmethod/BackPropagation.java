@@ -1,6 +1,7 @@
 package org.jmagicbrain.trainmethod;
 
 import org.jmagicbrain.NeuralNetwork;
+import org.jmagicbrain.exceptions.InvalidTrainingMethodArguments;
 import org.jmagicbrain.functions.ErrorFunction;
 
 import java.util.List;
@@ -82,16 +83,19 @@ public class BackPropagation extends TrainMethod{
                 }
             }
             currentEpoch++;
+            error = errorFunction.getError(trainingSet, expectedOutput);
+
+            if(error < maxError) break;
         }
 
-        return errorFunction.getError(trainingSet, expectedOutput);
+        return error;
     }
 
     public static class BackPropagationBuilder{
-        private double learningRate;
-        private double momentum;
-        private int maxEpochs;
-        private double maxError;
+        private Double learningRate;
+        private Double momentum;
+        private Integer maxEpochs;
+        private Double maxError;
         private double[][] trainingSet;
         private double[][] expectedOutput;
         private ErrorFunction errorFunction;
@@ -169,9 +173,25 @@ public class BackPropagation extends TrainMethod{
         /**
          * Crea una instancia de BackPropagation
          * @return Instancia de BackPropagation
+         * @throws InvalidTrainingMethodArguments En caso de tener algún argumento inválido
          */
-        public BackPropagation build(){
-            // TODO: Check params
+        public BackPropagation build() throws InvalidTrainingMethodArguments{
+
+            if(learningRate == null){
+                throw new InvalidTrainingMethodArguments("Learning rate is not set");
+            }else if(momentum == null){
+                throw new InvalidTrainingMethodArguments("Momentum is not set");
+            }else if(maxEpochs == null){
+                throw new InvalidTrainingMethodArguments("Max epochs is not set");
+            }else if(maxError == null){
+                throw new InvalidTrainingMethodArguments("Max error is not set");
+            }else if(trainingSet == null){
+                throw new InvalidTrainingMethodArguments("TRaining is not set");
+            }else if(expectedOutput == null){
+                throw new InvalidTrainingMethodArguments("Expected output is not set");
+            }else if(errorFunction == null){
+                throw new InvalidTrainingMethodArguments("Error function is not set");
+            }
 
             return new BackPropagation(
                     learningRate,
