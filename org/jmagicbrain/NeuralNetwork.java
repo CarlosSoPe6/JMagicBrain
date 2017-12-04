@@ -3,6 +3,7 @@ package org.jmagicbrain;
 import org.jmagicbrain.exceptions.InvalidNeuralNetworkArguments;
 import org.jmagicbrain.functions.ActivationFunction;
 import org.jmagicbrain.functions.ErrorFunction;
+import org.jmagicbrain.initializers.DefaultInitializer;
 import org.jmagicbrain.initializers.WeightInitializer;
 import org.jmagicbrain.trainmethod.TrainMethod;
 import java.util.List;
@@ -292,5 +293,20 @@ public class NeuralNetwork {
         }
         out += "]";
         return out;
+    }
+
+    /**
+     * Clona la red neuronal actual
+     * @return NeuralNetwork nueva con los valores clonados
+     */
+    @Override
+    public NeuralNetwork clone() {
+        ActivationFunction nActivation = this.activationFunction;
+        ErrorFunction nErrorFunc = this.errorFunction;
+        WeightInitializer nWI = new DefaultInitializer();
+        TrainMethod nTM = this.trainingMethod;
+
+        return new NeuralNetwork(nWI, nErrorFunc, nActivation, nTM, this.layersArray);
+
     }
 }
