@@ -5,7 +5,7 @@ import org.jmagicbrain.functions.ActivationFunction;
 import org.jmagicbrain.functions.ErrorFunction;
 import java.util.List;
 
-public abstract class TrainMethod
+public abstract class TrainMethod implements Trainer
 {
 	
 	protected NeuralNetwork neuralNetwork;
@@ -46,7 +46,5 @@ public abstract class TrainMethod
 	public void setNeuralNetwork(NeuralNetwork neuralNetwork){
 		this.neuralNetwork = neuralNetwork;
 	}
-	
-	public abstract double train();
 
 }

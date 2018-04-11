@@ -161,7 +161,7 @@ public class MNISTSample extends JFrame {
 
         trainMethod = new BackPropagation.BackPropagationBuilder()
                 .setErrorFunction(errorFunction)
-                .setMaxEpochs(5000)
+                .setMaxEpochs(1000)
                 .setMaxError(0.09)
                 .setMomentum(0.099099)
                 .setLearningRate(0.031099)
@@ -179,13 +179,13 @@ public class MNISTSample extends JFrame {
                 .addLayer(10)
                 .build();
 
-        System.out.println("Starting train");
-        System.out.println(neuralNetwork.train());
-        System.out.println("Ending train");
+        //System.out.println("Starting train");
+        //System.out.println(neuralNetwork.train());
+        //System.out.println("Ending train");
 
-        NNIO.exportNN(neuralNetwork, "C:\\\\Desarrollo\\\\DataSets\\\\Numeros\\f1000e5000.json");
+        //NNIO.exportNN(neuralNetwork, "C:\\\\Desarrollo\\\\DataSets\\\\Numeros\\f1000e5000.json");
 
-        //NNIO.importNN(neuralNetwork, "C:\\\\Desarrollo\\\\DataSets\\\\Numeros\\f100e1000.json");
+        NNIO.importNN(neuralNetwork, "C:\\\\Desarrollo\\\\DataSets\\\\Numeros\\f100e1000.json");
     }
 
     private void imageButtonActionPerformed(ActionEvent e) {
