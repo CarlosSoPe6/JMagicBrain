@@ -3,8 +3,11 @@ package org.jmagicbrain.trainmethod.regressors;
 import org.jmagicbrain.trainmethod.Trainer;
 
 public abstract class Regression implements Trainer{
-    private double[][] dependentVariables;
-    private double[][] independentVariables;
+
+    protected double[][] dependentVariables;
+    protected double[][] independentVariables;
+
+    protected double regressionValues[][];
 
     public void setDependentVariables(double[][] dependentVariables) {
         this.dependentVariables = dependentVariables;
