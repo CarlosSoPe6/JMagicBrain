@@ -1,6 +1,6 @@
 # README
 
-JMagicBrain is a Neural Network API
+JMagicBrain is a Neural network API for java with backpropagation and particle swarm optimization as training methods
 
 ## Disclaimer
 
